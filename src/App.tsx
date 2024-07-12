@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "./Layout/MainLayout";
 import HomePage from "./Pages/HomePage";
 import ProductsPage from "./Pages/ProductsPage";
+import ProductPage, { productLoader } from "./Pages/ProductPage";
 import AboutPage from "./Pages/AboutPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 
@@ -26,6 +27,11 @@ const App = () => {
             {
                path: '/products',
                element: <ProductsPage />
+            },
+            {
+               path: '/products/:productId',
+               element: <ProductPage />,
+               loader: productLoader,
             }
          ]
       }

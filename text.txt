@@ -1,0 +1,1 @@
+npx json-server data/products.json --watch --port 1111

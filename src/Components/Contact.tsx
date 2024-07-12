@@ -6,7 +6,7 @@ import Mail from "../assets/icons/mail-line.svg";
 
 const Contact = () => {
    return (
-      <div className="shadow-sm flex items-center justify-between px-[12rem] py-2">
+      <div className="shadow-sm flex items-center justify-between px-[10rem] py-2">
          <ul className="flex items-center justify-center gap-2">
             {
                contacts.map((contact) => (

@@ -3,8 +3,8 @@
       {
          "id": 1,
          "name": "Nike Mens Air Pegasus 30 Running Shoes",
-         "img": "../src/assets/images/shoe-1.jpg",
-         "priceCents": 3200,
+         "img": "../src/assets/images/shoe-1.jpeg",
+         "priceCents": 150,
          "rating": {
             "rate": 45,
             "stars": "../src/assets/images/ratings/rating-45.png" 
@@ -14,7 +14,7 @@
          "id": 2,
          "name": "Nike Sweet Classic Leather High Top Sneakers in Black For Men",
          "img": "../src/assets/images/shoe-2.webp",
-         "priceCents": 3200,
+         "priceCents": 120,
          "rating": {
             "rate": 50,
             "stars": "../src/assets/images/ratings/rating-50.png" 
@@ -24,10 +24,20 @@
          "id": 3,
          "name": "Nike Tanjun Womens Blue Mesh Athletic Lace Up Running Shoes",
          "img": "../src/assets/images/shoe-3.webp",
-         "priceCents": 3200,
+         "priceCents": 150,
          "rating": {
             "rate": 40,
             "stars": "../src/assets/images/ratings/rating-40.png" 
+         }
+      },
+      {
+         "id": 4,
+         "name": "Nike Wms Dunk High SP Varsity Purple White Women Shoes",
+         "img": "../src/assets/images/shoe-4.jpg",
+         "priceCents": 200,
+         "rating": {
+            "rate": 45,
+            "stars": "../src/assets/images/ratings/rating-45.png" 
          }
       }
    ]
