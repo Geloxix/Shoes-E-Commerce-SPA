@@ -11,7 +11,7 @@ export default {
         "palanquin": ["Palanquin", "Helvetica", "Sans-Serif"],
       },
       colors: {
-        "light-gray": "#F2F2F2",
+        "light-gray": "#F3F3F3",
       },
       gridTemplateColumns: {
         '3-cols' : 'repeat(3, minmax(200px, 1fr))',

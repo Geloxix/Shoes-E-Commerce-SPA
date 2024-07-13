@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { Products } from "../constants/types";
 
-const ProductsListings = ({ products, loading }) => {
+const ProductsListings = ({ products, loading } : { products: Products[] , loading: boolean}) => {
    return (
       <div className="mx-[12rem] mt-5">
          <h1 className="text-left mb-5">Our Products</h1>

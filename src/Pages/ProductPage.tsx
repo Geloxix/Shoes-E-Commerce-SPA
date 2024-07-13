@@ -13,6 +13,7 @@ const ProductPage = () => {
    );
 };
 
+
 const productLoader = async({ params }) => {
    const productId = params.productId;
 

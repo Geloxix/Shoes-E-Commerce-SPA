@@ -6,7 +6,7 @@
          "img": "../src/assets/images/shoe-1.jpeg",
          "priceCents": 150,
          "rating": {
-            "rate": 45,
+            "rate": 4.5,
             "stars": "../src/assets/images/ratings/rating-45.png" 
          }
       },
@@ -16,7 +16,7 @@
          "img": "../src/assets/images/shoe-2.webp",
          "priceCents": 120,
          "rating": {
-            "rate": 50,
+            "rate": 5.0,
             "stars": "../src/assets/images/ratings/rating-50.png" 
          }
       },
@@ -26,7 +26,7 @@
          "img": "../src/assets/images/shoe-3.webp",
          "priceCents": 150,
          "rating": {
-            "rate": 40,
+            "rate": 4.0,
             "stars": "../src/assets/images/ratings/rating-40.png" 
          }
       },
@@ -36,8 +36,48 @@
          "img": "../src/assets/images/shoe-4.jpg",
          "priceCents": 200,
          "rating": {
-            "rate": 45,
+            "rate": 4.5,
             "stars": "../src/assets/images/ratings/rating-45.png" 
+         }
+      },
+      {
+         "id": 5,
+         "name": "Nike Mens Vandal High Casual Sneakers",
+         "img": "../src/assets/images/shoe-5.webp",
+         "priceCents": 300,
+         "rating": {
+            "rate": 5.0,
+            "stars": "../src/assets/images/ratings/rating-50.png" 
+         }
+      },
+      {
+         "id": 6,
+         "name": "Nike Air Zoom X Clay Court Shoe Men Golden Yellow",
+         "img": "../src/assets/images/shoe-6.jpg",
+         "priceCents": 260,
+         "rating": {
+            "rate": 5.0,
+            "stars": "../src/assets/images/ratings/rating-50.png" 
+         }
+      },
+      {
+         "id": 7,
+         "name": "Nike Little Posite Pro GS Big Kids Shoes Racer Blue Total Crimson",
+         "img": "../src/assets/images/shoe-7.webp",
+         "priceCents": 280,
+         "rating": {
+            "rate": 5.0,
+            "stars": "../src/assets/images/ratings/rating-50.png" 
+         }
+      },
+      {
+         "id": 8,
+         "name": "Nike Womens Free RN Distnce Running Shoes Hype Pink Black Blue Glowing",
+         "img": "../src/assets/images/shoe-8.webp",
+         "priceCents": 300,
+         "rating": {
+            "rate": 5.0,
+            "stars": "../src/assets/images/ratings/rating-50.png" 
          }
       }
    ]
