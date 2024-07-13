@@ -3,12 +3,12 @@ import axios from "axios";
 
 import Product from "../Components/Product";
 
-const ProductPage = () => {
+const ProductPage = ({  setCartItem, cartItems}) => {
    const product = useLoaderData();
 
    return (
       <section>
-         <Product product={product} />
+         <Product product={product} setCartItem={setCartItem} cartItems={cartItems} />
       </section>
    );
 };
