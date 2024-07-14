@@ -3,6 +3,7 @@ import { create } from "zustand";
 type CartStore = {
    cartQuantity: number;
    incrementCartQuantity: () => void;
+   decrementCartQuantity: () => void;
 };
 
 const loadState = (): Partial<CartStore> => {
@@ -20,8 +21,16 @@ export const useCartStore = create<CartStore>((set) => ({
    incrementCartQuantity: () => {
       set((state) => {
          const newState = { cartQuantity: state.cartQuantity + 1};
+
          localStorage.setItem('cartQuantity', JSON.stringify(newState));
          return newState;
       });
+   },
+   decrementCartQuantity: () => {
+      set((state) => {
+         const newState = { cartQuantity: state.cartQuantity - 1 };
+         localStorage.setItem('cartQuantity', JSON.stringify(newState));
+         return newState;
+      })
    }
 }));

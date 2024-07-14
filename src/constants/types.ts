@@ -8,5 +8,12 @@ export interface Products {
    name: string;
    img: string;
    priceCents: number;
+   quantity: number;
    rating: Rating;
 }; 
+
+export interface ConfirmationType {
+   confirmation: boolean;
+   handleConfirm: () => void;
+   handleCloseConfirmation: () => void;
+};

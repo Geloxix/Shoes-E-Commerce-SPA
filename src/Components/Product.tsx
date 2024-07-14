@@ -13,6 +13,7 @@ const Product = ({ product, cartItems, setCartItem }: { product: Products, cartI
       name: product.name,
       img: product.img,
       priceCents: product.priceCents,
+      quantity: product.quantity,
       rating: {
          rate: product.rating.rate,
          stars: product.rating.stars

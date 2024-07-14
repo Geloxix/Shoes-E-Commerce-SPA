@@ -2,7 +2,7 @@ import { Products } from "../constants/types";
 
 import CartItems from "../Components/CartItems";
 
-const CartPage = ({ cartItems }) => {
+const CartPage = ({ cartItems }: { cartItems: Products[]}) => {
    return (
       <section className="bg-light-gray h-screen">
          <div className="mx-[1rem]">
