@@ -1,15 +1,18 @@
 import { Products } from "../constants/types";
 
+import CartItems from "../Components/CartItems";
+
 const CartPage = ({ cartItems }) => {
    return (
-      <section>
+      <section className="bg-light-gray h-screen">
          <div className="mx-[1rem]">
-            <ul>
+            <ul className="mt-[1rem] p-3">
                {
                   cartItems.map((cartItem: Products) => (
-                     <li key={cartItem.id}>
-                        <h1>{ cartItem.name }</h1>
-                     </li>
+                     <CartItems  
+                        key={cartItem.id}
+                        cartItem={cartItem}
+                     />
                   ))
                }
             </ul>

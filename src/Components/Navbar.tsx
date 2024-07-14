@@ -6,7 +6,7 @@ import Cart from "../assets/images/cart.png";
 import { useCartStore } from "../constants/store";
 
 const Navbar = () => {
-   const { cartQuantity } = useCartStore();
+   const cartQ = useCartStore((state) => state.cartQuantity);
 
    return (
       <header>
@@ -37,7 +37,7 @@ const Navbar = () => {
                         alt="Cart icon"
                         className="w-[30px]" 
                      />
-                     <p className="absolute top-[-10px] right-[8px] font-semibold text-red-500">{ cartQuantity }</p>
+                     <p className="absolute top-[-10px] right-[8px] font-semibold text-red-500">{ cartQ }</p>
                   </Link>
                </ul>
             </nav>

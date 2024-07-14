@@ -3,7 +3,9 @@ import axios from "axios";
 
 import Product from "../Components/Product";
 
-const ProductPage = ({  setCartItem, cartItems}) => {
+import { Products } from "../constants/types";
+
+const ProductPage = ({  setCartItem, cartItems }: { cartItems: Products[] }) => {
    const product = useLoaderData();
 
    return (
