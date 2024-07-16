@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-
 import { useState } from "react";
 import { Products } from "./constants/types";
+import "react-toastify/dist/ReactToastify.css";
 
 //PAGES
 import MainLayout from "./Layout/MainLayout";
@@ -18,10 +18,7 @@ const App = () => {
    const [ cartItems, setCartItem ] = useState<Products[]>(() => {
       const savedNewProducts = localStorage.getItem("cartItem");
       return savedNewProducts ? JSON.parse(savedNewProducts) : [];
-   });
-
-   console.log(cartItems);
-   
+   });   
 
    const router = createBrowserRouter([
       {

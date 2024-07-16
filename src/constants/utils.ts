@@ -25,17 +25,17 @@ export const navLinks = [
 export const contacts = [
    {
       "id": 1,
-      "img": "../src/assets/icons/instagram-line.png",
+      "img": "../src/assets/icons/instagram-line.svg",
       "path": '#'
    },
    {
       "id": 2,
-      "img": "../src/assets/icons/twitter-x-line.png",
+      "img": "../src/assets/icons/twitter-x-line.svg",
       "path": '#'
    },
    {
       "id": 3,
-      "img": "../src/assets/icons/facebook-fill.png",
+      "img": "../src/assets/icons/facebook-fill.svg",
       "path": '#'
    }
 ];

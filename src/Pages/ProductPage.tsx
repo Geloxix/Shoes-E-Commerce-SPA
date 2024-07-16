@@ -1,8 +1,8 @@
 import { useLoaderData } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer } from "react-toastify";
 
 import Product from "../Components/Product";
-
 import { Products } from "../constants/types";
 
 const ProductPage = ({  setCartItem, cartItems }: { cartItems: Products[] }) => {
@@ -10,6 +10,7 @@ const ProductPage = ({  setCartItem, cartItems }: { cartItems: Products[] }) => 
 
    return (
       <section>
+         <ToastContainer />
          <Product product={product} setCartItem={setCartItem} cartItems={cartItems} />
       </section>
    );

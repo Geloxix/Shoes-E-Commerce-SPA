@@ -4,7 +4,7 @@ import { Products } from "../constants/types";
 
 const ProductsListings = ({ products, loading } : { products: Products[] , loading: boolean}) => {
    return (
-      <div className="mx-[12rem] mt-5">
+      <div className="mx-[12rem] mt-5 py-[3rem]">
          <h1 className="text-left mb-5">Our Products</h1>
          <div className="flex items-center justify-center">
             {
@@ -14,7 +14,7 @@ const ProductsListings = ({ products, loading } : { products: Products[] , loadi
                      products.map((product: Products) => (
                         <li
                            key={product.id}
-                           className="border-2 border-light-gray"
+                           className="border-2 border-light-gray bg-white"
                         >  
                            <Link to={`/products/${product.id}`}>
                               <img 

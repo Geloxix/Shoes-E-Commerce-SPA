@@ -3,42 +3,16 @@ import { Products } from "../constants/types";
 
 import { useCartStore } from "../constants/store";
 
-import Modal from "./Modal";
+import Confirmation from "./Confirmation";
 
 
 const CartItems = ({ cartItem }: { cartItem: Products } ) => {
    const { decrementCartQuantity, cartQuantity } = useCartStore();
-
-   const [ productQuantity, setProductQuantity  ] = useState<number>(cartItem.quantity);
-   const [ price, setPrice ] = useState<number>(cartItem.priceCents);
-   const [ confirmation, setConfirmation ] = useState(false);
-
    const savedProduct = localStorage.getItem('cartItem'); //getting the array item saved to localStorage
-   console.log(price);
-   console.log(productQuantity);
-   
 
-   const handleProductIncrement = () => {
-      setProductQuantity((prev) => prev + 1)
-      setPrice((prev) => prev * productQuantity);
-   };
-
-   const handleProductDecrement = () => {
-      if (productQuantity !== 1) {
-         setProductQuantity((prev) => prev - 1);
-         setPrice((prev) => prev / productQuantity);
-      } else {
-         setConfirmation(true);
-      }
-   };
-
-   const handleConfirm = () => {
-      console.log("wahaha");
-   }; 
-
-   const handleCloseConfirmation = () => {
-      setConfirmation(false);
-   };
+   const [ itemQuantity, setItemQuantity ] = useState<number>(cartItem.quantity);
+   const [ totalPrice, setTotalPrice ] = useState<number>(cartItem.priceCents);
+   const [ confirmation, setConfirmation ] = useState<boolean>(false);
 
    const handleRemoveProduct = (id: number) => {
       let productItem = JSON.parse(savedProduct!);
@@ -55,6 +29,31 @@ const CartItems = ({ cartItem }: { cartItem: Products } ) => {
       localStorage.setItem("cartItem", updatedProduct);
    };
 
+   const handleIncrementQuantity = () => {
+      const newQuantity = itemQuantity + 1;
+      setItemQuantity(newQuantity);
+      setTotalPrice(newQuantity * cartItem.priceCents);
+   };
+
+   const handleDecrementQuantity = () => {
+      if (itemQuantity <= 1) {
+         setConfirmation(true);
+      } else {
+         const newQuantity = itemQuantity - 1;
+         setItemQuantity(newQuantity);
+         setTotalPrice(cartItem.priceCents / newQuantity);
+      }
+   };
+   
+   const handleConfirm = () => {
+      handleRemoveProduct(cartItem.id);
+      setConfirmation(false);
+   }; 
+
+   const handleCloseConfirmation = () => {
+      setConfirmation(false);
+   };
+
    return (
       <div className="mx-[12rem] bg-white mb-2">
          <div className="flex items-center justify-between shadow-sm px-[5rem]">
@@ -63,26 +62,26 @@ const CartItems = ({ cartItem }: { cartItem: Products } ) => {
                   src={cartItem.img} alt={cartItem.name} 
                   className="w-[200px]"
                />
-               <p className="w-[200px] text-[0.90em] mt-[-30px]">{ cartItem.name }</p>
+               <p className="w-[200px] text-[0.90em] mt-[-30px] font-montserrat">{ cartItem.name }</p>
             </div>
             <div className="flex items-center justify-center">
                <button 
                   className="increment-decrement-quantity"
-                  onClick={handleProductDecrement}
+                  onClick={handleDecrementQuantity}
                >-</button>
-               <p className="px-6 py-1 border-t-[1.5px] border-b-[1.5px] pointer-events-none">{ productQuantity}</p>
+               <p className="px-6 py-1 border-t-[1.5px] border-b-[1.5px] pointer-events-none">{ itemQuantity }</p>
                <button 
                   className="increment-decrement-quantity"
-                  onClick={handleProductIncrement}
+                  onClick={handleIncrementQuantity}
                >+</button>
             </div>
-            <p className="pointer-events-none">{`$${(price).toFixed(2)}`}</p>
+            <p className="pointer-events-none text-[0.90em]">{`$${(totalPrice!).toFixed(2)}`}</p>
             <button 
                className="hover:text-red-500 transition-all text-[0.90em]"
                onClick={() => handleRemoveProduct(cartItem.id)}
             >Delete</button>
          </div>
-         <Modal confirmation={confirmation} handleConfirm={handleConfirm} handleCloseConfirmation={handleCloseConfirmation}  />
+         <Confirmation itemName={cartItem.name} confirmation={confirmation} handleConfirm={handleConfirm} handleCloseConfirmation={handleCloseConfirmation}  />
       </div>
    );
 };

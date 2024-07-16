@@ -9,13 +9,15 @@ export default {
       fontFamily: {
         "poppins": ["Poppins", "Helvetica", "Sans-Serif"],
         "palanquin": ["Palanquin", "Helvetica", "Sans-Serif"],
+        "pacifico": ["Pacifico", "Helvetica", "Sans-Serif"],
+        "montserrat": ["Monserrat", "Helvetica", "san-serif"],
       },
       colors: {
         "light-gray": "#FAFAFA",
       },
       gridTemplateColumns: {
-        '3-cols' : 'repeat(3, minmax(200px, 1fr))',
-        '4-cols' : 'repeat(4, minmax(200px, 1fr))',
+        '3-cols' : 'repeat(3, minmax(100px, 1fr))',
+        '4-cols' : 'repeat(4, minmax(100px, 1fr))',
       }
     },
   },

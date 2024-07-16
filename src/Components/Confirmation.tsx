@@ -1,16 +1,17 @@
-import { ConfirmationType } from "../constants/types";
+// import { ConfirmationType } from "../constants/types";
 
 
-const Modal = ({ confirmation, handleConfirm, handleCloseConfirmation}: ConfirmationType) => {
+const Confirmation = ({ confirmation, handleConfirm, handleCloseConfirmation, itemName } ) => {
+
    if (!confirmation) {
       return null;
    }
    
    return (
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-         <div className="bg-white rounded-sm p-6 shadow-md">
-            <h1 className="mb-2">Confirmation</h1>
-            <p className="text-[0.90em] mb-5">Are you sure you want to remove it?</p>
+         <div className="bg-white rounded-sm p-8 shadow-md">
+            <h1 className="mb-4 text-xl text-red-500 font-palanquin">Are you sure you want to remove?</h1>
+            <p className="text-[0.90em] mb-8">{ itemName }</p>
             <div className="flex justify-end">
                <button
                   onClick={handleCloseConfirmation}
@@ -26,4 +27,4 @@ const Modal = ({ confirmation, handleConfirm, handleCloseConfirmation}: Confirma
    );
 };
 
-export default Modal;
+export default Confirmation;

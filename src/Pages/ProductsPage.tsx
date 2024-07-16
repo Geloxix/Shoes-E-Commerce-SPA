@@ -24,7 +24,7 @@ const ProductsPage = () => {
    
 
    return (
-      <section>
+      <section className="bg-light-gray">
          <ProductsListings products={products} loading={loading} />
       </section>
    );

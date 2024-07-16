@@ -1,5 +1,4 @@
 import { Products } from "../constants/types";
-
 import CartItems from "../Components/CartItems";
 
 const CartPage = ({ cartItems }: { cartItems: Products[]}) => {

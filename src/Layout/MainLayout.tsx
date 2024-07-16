@@ -4,7 +4,7 @@ import Navbar from "../Components/Navbar";
 
 const MainLayout = () => {
    return (
-      <main>
+      <main className="h-screen">
          <Navbar />
          <Outlet />
       </main>

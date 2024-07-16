@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 import { Products } from "../constants/types";
 import { RiHeart3Line } from "@remixicon/react";
 import { useCartStore } from "../constants/store";
 
 const Product = ({ product, cartItems, setCartItem }: { product: Products, cartItems: Products[] }) => {
-   const { incrementCartQuantity, cartQuantity } = useCartStore();
+   const { incrementCartQuantity } = useCartStore();
 
    const newProduct: Products = {
       id: product.id,
@@ -19,19 +20,18 @@ const Product = ({ product, cartItems, setCartItem }: { product: Products, cartI
          stars: product.rating.stars
       }
    }; 
-
-   console.log(cartQuantity);
    
    useEffect(() => {
       localStorage.setItem("cartItem", JSON.stringify(cartItems));
    },[cartItems]);
 
-   const handleAddToCart = () => {
-      if (cartItems.some((p: Products) => p.id === product.id)) {
-         alert("Already in the cart!");
+   const handleAddToCart = (id: number) => {
+      if (cartItems.some((p: Products) => p.id === id)) {
+         toast.error('item already in the cart!');
       } else {
          setCartItem([...cartItems, newProduct]);
          incrementCartQuantity();
+         toast.success("item has been added to your cart!");
       }
    };
 
@@ -70,7 +70,7 @@ const Product = ({ product, cartItems, setCartItem }: { product: Products, cartI
                <div className="justify-self-end">
                   <button 
                      className="add-buy-button bg-white text-red-500 border-[1px] border-red-500 mr-3"
-                     onClick={handleAddToCart}
+                     onClick={() => handleAddToCart(product.id)}
                   >Add To Cart</button>
                   <button 
                      className="add-buy-button bg-red-500 text-white"
