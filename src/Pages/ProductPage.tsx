@@ -9,7 +9,7 @@ const ProductPage = ({  setCartItem, cartItems }: { cartItems: Products[] }) => 
    const product = useLoaderData();
 
    return (
-      <section>
+      <section className="bg-light-gray h-full">
          <ToastContainer />
          <Product product={product} setCartItem={setCartItem} cartItems={cartItems} />
       </section>

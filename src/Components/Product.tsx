@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+import AddToCartModal from "./AddToCartModal";
 import { Products } from "../constants/types";
 import { RiHeart3Line } from "@remixicon/react";
 import { useCartStore } from "../constants/store";
 
 const Product = ({ product, cartItems, setCartItem }: { product: Products, cartItems: Products[] }) => {
    const { incrementCartQuantity } = useCartStore();
+   const [ openModal, setOpenModal ] = useState<boolean>(false);
 
    const newProduct: Products = {
       id: product.id,
@@ -31,13 +33,17 @@ const Product = ({ product, cartItems, setCartItem }: { product: Products, cartI
       } else {
          setCartItem([...cartItems, newProduct]);
          incrementCartQuantity();
-         toast.success("item has been added to your cart!");
+         setOpenModal(true);
       }
+
+      setTimeout(() => {
+         setOpenModal(false);
+      }, 1000);
    };
 
    return (
-      <div className="mx-[12rem] mt-5">
-         <div className="flex items-center justify-center gap-5 border-2">
+      <div className="mx-[12rem] py-[1rem]">
+         <div className="flex gap-8 bg-white p-5">
             <div>
                <img 
                   src={product.img} 
@@ -46,7 +52,7 @@ const Product = ({ product, cartItems, setCartItem }: { product: Products, cartI
                />
                <Link 
                   to="/favorites"
-                  className="flex gap-2 items-center justify-center py-2"
+                  className="flex gap-2 items-center justify-start py-2"
                >
                   <RiHeart3Line 
                      className="text-red-500"
@@ -55,17 +61,18 @@ const Product = ({ product, cartItems, setCartItem }: { product: Products, cartI
                </Link>
             </div>
 
-            <div className="p-3 h-full">
-               <div className="mb-[50%]">
-                  <p className="text-wrap">{ product.name }</p>
-                  <div className="flex items-center justify-start">
-                     <p className="text-[0.90em]">{(product.rating.rate).toFixed(1)}</p>
+            <div className="p-3 flex flex-col items-start justify-between py-3">
+               <div>
+                  <p className="text-wrap text-[20px] mb-2">{ product.name }</p>
+                  <div className="flex items-center justify-start mb-3">
+                     <p className="text-[0.80em] mr-2">{(product.rating.rate).toFixed(1)}</p>
                      <img 
                         src={product.rating.stars} 
                         alt="rating stars" 
                         className="w-[70px]"
                      />
                   </div>
+                  <p className="px-[2rem] py-3 w-full bg-light-gray text-2xl font-semibold font-montserrat text-red-500">{`$${(product.priceCents).toFixed(2)}`}</p>
                </div>
                <div className="justify-self-end">
                   <button 
@@ -78,6 +85,7 @@ const Product = ({ product, cartItems, setCartItem }: { product: Products, cartI
                </div>
             </div>
          </div>
+         <AddToCartModal openModal={openModal} />
       </div>
    );
 };

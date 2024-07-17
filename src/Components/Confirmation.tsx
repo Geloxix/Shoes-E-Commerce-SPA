@@ -1,6 +1,5 @@
 // import { ConfirmationType } from "../constants/types";
 
-
 const Confirmation = ({ confirmation, handleConfirm, handleCloseConfirmation, itemName } ) => {
 
    if (!confirmation) {

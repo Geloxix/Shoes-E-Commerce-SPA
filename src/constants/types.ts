@@ -17,3 +17,8 @@ export interface ConfirmationType {
    handleConfirm: () => void;
    handleCloseConfirmation: () => void;
 };
+
+// export interface SearchProductTypes {
+//    filteredProduct: string;
+//    setFilteredProduct: (value: string) => void;
+// };

@@ -4,7 +4,6 @@ import { useCartStore } from "../constants/store";
 import { navLinks } from "../constants/utils";
 import Contact from "./Contact";
 
-import { RiSearch2Line } from "@remixicon/react";
 import Cart from "../assets/images/cart.png";
 import logo from "../assets/images/header-logo.svg";
 
@@ -23,19 +22,7 @@ const Navbar = () => {
                   className="w-[90px]"
                />
             </div>
-            <div className="w-[700px] border-2 flex font-palanquin">
-               <input 
-                  type="text" 
-                  name="serch product" 
-                  className="py-[7px] w-full pl-3 text-[0.90em]"
-                  placeholder="Search for products"
-               />
-               <button className="px-7 bg-red-500 text-white">
-                  <RiSearch2Line 
-                     className="w-[20px]"
-                  />
-               </button>
-            </div>
+            
             <nav>
                <ul className={`flex items-center justify-center text-[0.90em]`}>
                   {

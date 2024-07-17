@@ -1,36 +1,29 @@
-import { Link } from "react-router-dom";
+import {  useState } from "react";
+
+import ProductsList from "./ProductsList";
+import Spinner from "./Spinner";
+import SearchProduct from "./SearchProduct";
 
 import { Products } from "../constants/types";
 
 const ProductsListings = ({ products, loading } : { products: Products[] , loading: boolean}) => {
+   const [ filteredProduct, setFilteredProduct ] = useState<string>('');
+
+   const filteredProducts = products.filter((prod: Products) => 
+      prod.name.toLowerCase().includes(filteredProduct.toLowerCase()),
+   );
+
    return (
-      <div className="mx-[12rem] mt-5 py-[3rem]">
-         <h1 className="text-left mb-5">Our Products</h1>
+      <div className="mx-[12rem] h-full mt-5 py-[3rem]">
+         <div className="w-full flex items-center justify-between mb-5">
+            <h1>Our Products</h1>
+            <SearchProduct  setFilteredProduct={setFilteredProduct} filteredProduct={filteredProduct} />
+         </div>
+         
          <div className="flex items-center justify-center">
             {
-               loading ? <div className="h-full">Loading....</div> : 
-               <ul className="grid grid-cols-4-cols place-content-center place-items-center gap-2">
-                  {
-                     products.map((product: Products) => (
-                        <li
-                           key={product.id}
-                           className="border-2 border-light-gray bg-white"
-                        >  
-                           <Link to={`/products/${product.id}`}>
-                              <img 
-                                 src={product.img} 
-                                 alt={product.name} 
-                                 className="bg-transparent"
-                              />
-                           </Link>
-                           <div className="p-3 text-[0.80em]">
-                              <p className="text-left">{`${product.name.slice(0, 35)}...`}</p>
-                              <p>{`$${(product.priceCents).toFixed(2)}`}</p>
-                           </div>
-                        </li>
-                     ))
-                  }
-               </ul>
+               loading ? ( <Spinner loading={loading} /> ) : 
+               <ProductsList  filteredProducts={filteredProducts} />
             }
          </div>
       </div>
