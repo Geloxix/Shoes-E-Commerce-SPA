@@ -17,11 +17,6 @@ export const navLinks = [
    },
    {
       "id": 4,
-      "name": "Blog",
-      "path": "/blog"
-   },
-   {
-      "id": 5,
       "name": "Contact",
       "path": "/contact"
    }
@@ -42,5 +37,27 @@ export const contacts = [
       "id": 3,
       "img": "../src/assets/icons/facebook-fill.svg",
       "path": '#'
+   }
+];
+
+
+export const communications = [
+   {
+      "id": 1,
+      "name": "EMAIL",
+      "img": "../src/assets/icons/mail-line-black.svg",
+      "contact": "Example@gmail.com",
+   },
+   {
+      "id": 2,
+      "name": "PHONE NUMBER",
+      "img": "../src/assets/icons/phone-line.svg",
+      "contact": "000-0000-0000",
+   },
+   {
+      "id": 3,
+      "name": "ADDRESS",
+      "img": "../src/assets/icons/map-pin-line.svg",
+      "contact": "0000 Undefined, Abstract street",
    }
 ];

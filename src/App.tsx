@@ -1,8 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Products } from "./constants/types";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 //PAGES
 import MainLayout from "./Layout/MainLayout";
@@ -16,10 +17,28 @@ import BlogPage from "./Pages/BlogPage";
 import ContactPage from "./Pages/ContactPage";
 
 const App = () => {
+   const [ products, setProducts ] = useState([]);
+   const [ loading, setLoading ] = useState<boolean>(true);
    const [ cartItems, setCartItem ] = useState<Products[]>(() => {
       const savedNewProducts = localStorage.getItem("cartItem");
       return savedNewProducts ? JSON.parse(savedNewProducts) : [];
    });   
+
+   
+   useEffect(() => {
+      const fetchProducts = async() => {
+         try {
+            const res = await axios.get(`/api/products`);
+            setProducts(res.data);
+         } catch (e) {
+            console.error("Error", e);
+         } finally {
+            setLoading(false);
+         } 
+      };
+
+      fetchProducts();
+   },[]);
 
    const router = createBrowserRouter([
       {
@@ -29,7 +48,7 @@ const App = () => {
          children: [
             {
                path: '/',
-               element: <HomePage />
+               element: <HomePage products={products} />
             },
             {
                path: '/about',
@@ -37,7 +56,7 @@ const App = () => {
             },
             {
                path: '/products',
-               element: <ProductsPage />
+               element: <ProductsPage products={products} loading={loading} />
             },
             {
                path: '/products/:productId',

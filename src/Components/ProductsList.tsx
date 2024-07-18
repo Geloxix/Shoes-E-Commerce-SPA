@@ -11,18 +11,17 @@ const ProductsList = ({ filteredProducts }: { filteredProducts: Products[] }) =>
                   filteredProducts.map((product: Products) => (
                      <li
                         key={product.id}
-                        className="border-2 border-light-gray bg-white"
+                        className="border-2 border-light-gray bg-white p-3"
                      >  
                         <Link to={`/products/${product.id}`}>
                            <img 
                               src={product.img} 
                               alt={product.name} 
-                              className="bg-transparent"
                            />
                         </Link>
                         <div className="p-3 text-[0.80em]">
-                           <p className="text-left">{`${product.name.slice(0, 35)}...`}</p>
-                           <p>{`$${(product.priceCents).toFixed(2)}`}</p>
+                           <p className="mb-3 text-red-500">{`$${(product.priceCents).toFixed(2)}`}</p>
+                           <p className="text-left">{`${product.name.slice(0, 60)}..`}</p>
                         </div>
                      </li>
                   ))

@@ -4,8 +4,8 @@ import emptyCart from "../assets/images/empty-cart.png";
 
 const CartPage = ({ cartItems }: { cartItems: Products[]}) => {
    return (
-      <section className="bg-light-gray h-screen flex items-center justify-center">
-         <div className="mx-[1rem]">
+      <section className="bg-light-gray h-full flex items-start justify-center">
+         <div className="mx-[1rem] w-full">
             {
                cartItems.length !== 0 ? (
                   <ul className="mt-[1rem] p-3">
@@ -19,7 +19,7 @@ const CartPage = ({ cartItems }: { cartItems: Products[]}) => {
                      }
                   </ul>
                ) :
-               <div className="flex items-center justify-center flex-col gap-5">
+               <div className="flex items-center justify-center my-[10%] flex-col gap-5">
                   <img 
                      src={emptyCart} 
                      alt="Empty cart image" 

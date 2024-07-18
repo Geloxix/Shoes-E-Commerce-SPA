@@ -4,12 +4,14 @@ import { toast } from "react-toastify";
 
 import AddToCartModal from "./AddToCartModal";
 import { Products } from "../constants/types";
-import { RiHeart3Line } from "@remixicon/react";
 import { useCartStore } from "../constants/store";
+import heartFill from "../assets/icons/heart-3-fill.svg";
+import heartLine from "../assets/icons/heart-3-line.svg";
 
 const Product = ({ product, cartItems, setCartItem }: { product: Products, cartItems: Products[] }) => {
    const { incrementCartQuantity } = useCartStore();
    const [ openModal, setOpenModal ] = useState<boolean>(false);
+   const [ isClick, setIsClick ] = useState<boolean>(false);
 
    const newProduct: Products = {
       id: product.id,
@@ -26,6 +28,10 @@ const Product = ({ product, cartItems, setCartItem }: { product: Products, cartI
    useEffect(() => {
       localStorage.setItem("cartItem", JSON.stringify(cartItems));
    },[cartItems]);
+
+   const handleClickFavorites = () => {
+      setIsClick(!isClick);
+   };
 
    const handleAddToCart = (id: number) => {
       if (cartItems.some((p: Products) => p.id === id)) {
@@ -50,15 +56,19 @@ const Product = ({ product, cartItems, setCartItem }: { product: Products, cartI
                   alt={product.name} 
                   className="w-[500px]"
                />
-               <Link 
-                  to="/favorites"
-                  className="flex gap-2 items-center justify-start py-2"
-               >
-                  <RiHeart3Line 
-                     className="text-red-500"
-                  />
-                  <span>Favorites</span>
-               </Link>
+               <li 
+                  className="flex gap-2 items-center justify-start py-2 text-lg font-open-sans"
+               >  
+                  <button onClick={handleClickFavorites}>
+                     <img 
+                        src={`${isClick ? heartFill : heartLine}`} 
+                        alt="heart"
+                        width={25} 
+                     />
+                  </button>
+                 
+                  <Link to="/favorites">Favorites</Link>
+               </li>
             </div>
 
             <div className="p-3 flex flex-col items-start justify-between py-3">

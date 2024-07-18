@@ -18,6 +18,12 @@ export interface ConfirmationType {
    handleCloseConfirmation: () => void;
 };
 
+export interface Communications {
+   id: number;
+   name: string;
+   img: string;
+   contact: string;
+}
 // export interface SearchProductTypes {
 //    filteredProduct: string;
 //    setFilteredProduct: (value: string) => void;

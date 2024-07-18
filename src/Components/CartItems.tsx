@@ -57,12 +57,12 @@ const CartItems = ({ cartItem }: { cartItem: Products } ) => {
    return (
       <div className="mx-[12rem] bg-white mb-2">
          <div className="flex items-center justify-between shadow-sm px-[5rem]">
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center gap-3">
                <img 
                   src={cartItem.img} alt={cartItem.name} 
                   className="w-[200px]"
                />
-               <p className="w-[200px] text-[0.90em] mt-[-30px] font-montserrat">{ cartItem.name }</p>
+               <p className="w-[200px] text-[0.80em] font-open-sans">{ cartItem.name }</p>
             </div>
             <div className="flex items-center justify-center">
                <button 
@@ -75,7 +75,7 @@ const CartItems = ({ cartItem }: { cartItem: Products } ) => {
                   onClick={handleIncrementQuantity}
                >+</button>
             </div>
-            <p className="pointer-events-none text-[0.90em]">{`$${(totalPrice!).toFixed(2)}`}</p>
+            <p className="pointer-events-none text-[0.90em] text-red-500 font-semibold">{`$${(totalPrice!).toFixed(2)}`}</p>
             <button 
                className="hover:text-red-500 transition-all text-[0.90em]"
                onClick={() => handleRemoveProduct(cartItem.id)}

@@ -10,7 +10,8 @@ export default {
         "poppins": ["Poppins", "Helvetica", "Sans-Serif"],
         "palanquin": ["Palanquin", "Helvetica", "Sans-Serif"],
         "pacifico": ["Pacifico", "Helvetica", "Sans-Serif"],
-        "montserrat": ["Monserrat", "Helvetica", "san-serif"],
+        "montserrat": ["Monserrat", "Helvetica", "sans-serif"],
+        "open-sans": ["Open Sans", "Helvetica", "sans-serif"]
       },
       colors: {
         "light-gray": "#FAFAFA",
@@ -18,6 +19,7 @@ export default {
       gridTemplateColumns: {
         '3-cols' : 'repeat(3, minmax(100px, 1fr))',
         '4-cols' : 'repeat(4, minmax(100px, 1fr))',
+        'second-cols-3': 'repeat(3, minmax(100px, 1fr))',
       }
     },
   },
