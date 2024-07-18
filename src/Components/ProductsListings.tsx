@@ -14,7 +14,7 @@ const ProductsListings = ({ products, loading } : { products: Products[] , loadi
    );
 
    return (
-      <div className="mx-[12rem] h-full mt-5 py-[3rem]">
+      <div className="mx-[12rem] h-full py-[3rem]">
          <div className="w-full flex items-center justify-between mb-5">
             <h1>Our Products</h1>
             <SearchProduct  setFilteredProduct={setFilteredProduct} filteredProduct={filteredProduct} />

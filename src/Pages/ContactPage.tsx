@@ -1,12 +1,12 @@
 
-const AboutPage = () => {
+const ContactPage = () => {
    return (
       <section>
          <div className="mx-[12rem]">
-            About
+            ContactPage
          </div>
       </section>
    );
 };
 
-export default AboutPage;
+export default ContactPage;

@@ -1,12 +1,13 @@
 
-const AboutPage = () => {
+const BlogPage = () => {
    return (
       <section>
          <div className="mx-[12rem]">
-            About
+            BlogPage
          </div>
       </section>
    );
+   
 };
 
-export default AboutPage;
+export default BlogPage;

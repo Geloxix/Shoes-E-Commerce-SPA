@@ -24,13 +24,13 @@ const Navbar = () => {
             </div>
             
             <nav>
-               <ul className={`flex items-center justify-center text-[0.90em]`}>
+               <ul className={`flex items-center justify-center text-[0.80em]`}>
                   {
                      navLinks.map((nav) => (
                         <NavLink 
                            key={nav.id}
                            className={({ isActive }) => 
-                              `${isActive ? "border-b-2 border-zinc-800 transition-all" : "transition-all"} mr-[20px]
+                              `${isActive ? "border-b-2 border-zinc-800 transition-all" : "transition-all"} mr-[1.5rem]
                               `}
                            to={nav.path}
                         >
