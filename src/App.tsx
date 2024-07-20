@@ -13,7 +13,6 @@ import ProductPage, { productLoader } from "./Pages/ProductPage";
 import AboutPage from "./Pages/AboutPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import CartPage from "./Pages/CartPage";
-import BlogPage from "./Pages/BlogPage";
 import ContactPage from "./Pages/ContactPage";
 
 const App = () => {
@@ -66,10 +65,6 @@ const App = () => {
             {
                path: '/cart',
                element: <CartPage cartItems={cartItems} />
-            },
-            {
-               path: '/blog',
-               element: <BlogPage />
             },
             {
                path: '/contact',

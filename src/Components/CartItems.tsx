@@ -62,7 +62,7 @@ const CartItems = ({ cartItem }: { cartItem: Products } ) => {
                   src={cartItem.img} alt={cartItem.name} 
                   className="w-[200px]"
                />
-               <p className="w-[200px] text-[0.80em] font-open-sans">{ cartItem.name }</p>
+               <p className="w-[200px] text-[0.80em] font-poppins">{ cartItem.name }</p>
             </div>
             <div className="flex items-center justify-center">
                <button 

@@ -11,7 +11,8 @@ export default {
         "palanquin": ["Palanquin", "Helvetica", "Sans-Serif"],
         "pacifico": ["Pacifico", "Helvetica", "Sans-Serif"],
         "montserrat": ["Monserrat", "Helvetica", "sans-serif"],
-        "open-sans": ["Open Sans", "Helvetica", "sans-serif"]
+        "open-sans": ["Open Sans", "Helvetica", "sans-serif"],
+        "roboto": ["Roboto", "Helvetica", "sans-serif"],
       },
       colors: {
         "light-gray": "#FAFAFA",

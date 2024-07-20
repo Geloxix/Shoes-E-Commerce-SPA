@@ -19,9 +19,9 @@ const ProductsList = ({ filteredProducts }: { filteredProducts: Products[] }) =>
                               alt={product.name} 
                            />
                         </Link>
-                        <div className="p-3 text-[0.80em]">
-                           <p className="mb-3 text-red-500">{`$${(product.priceCents).toFixed(2)}`}</p>
-                           <p className="text-left">{`${product.name.slice(0, 60)}..`}</p>
+                        <div className="p-3">
+                           <p className="mb-3 text-red-500 font-semibold font-roboto text-[0.80em]">{`$${(product.priceCents).toFixed(2)}`}</p>
+                           <p className="text-left text-[0.90em]">{`${product.name.slice(0, 60)}..`}</p>
                         </div>
                      </li>
                   ))

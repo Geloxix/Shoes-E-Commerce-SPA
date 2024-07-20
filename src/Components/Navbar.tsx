@@ -1,11 +1,15 @@
+//router dom imports
 import { NavLink, Link } from "react-router-dom";
 
+//import components
 import { useCartStore } from "../constants/store";
 import { navLinks } from "../constants/utils";
 import Contact from "./Contact";
 
-import Cart from "../assets/images/cart.png";
+//icons imported
+import bag from "../assets/images/handbag-line.png";
 import logo from "../assets/images/header-logo.svg";
+import accountCircle from "../assets/icons/account-circle-line.svg";
 
 
 const Navbar = () => {
@@ -30,7 +34,7 @@ const Navbar = () => {
                         <NavLink 
                            key={nav.id}
                            className={({ isActive }) => 
-                              `${isActive ? "border-b-2 border-zinc-800 transition-all" : "transition-all"} mr-[1.5rem]
+                              `${isActive ? "border-b-2 border-zinc-800 transition-all" : "transition-all"} mr-[1.8rem]
                               `}
                            to={nav.path}
                         >
@@ -38,17 +42,27 @@ const Navbar = () => {
                         </NavLink>
                      ))
                   }
-                  <Link 
-                     to="/cart"
-                     className="relative" 
-                  >
-                     <img 
-                        src={Cart} 
-                        alt="Cart icon"
-                        className="w-[30px]" 
-                     />
-                     <p className="absolute top-[-10px] right-[8px] text-red-500 font-semibold">{ cartQ }</p>
-                  </Link>
+                  <div className="flex gap-2">
+                     <button>
+                        <img 
+                           src={accountCircle} 
+                           alt="account circle" 
+                           className="w-[23px]"
+                        />
+                     </button>
+
+                     <Link 
+                        to="/cart"
+                        className="relative" 
+                     >
+                        <img 
+                           src={bag} 
+                           alt="Cart icon"
+                           className="w-[23px]" 
+                        />
+                        <span className="absolute top-[-5px] right-[-5px] w-[20px] h-[19px] rounded-full text-center bg-red-600 text-white">{ cartQ }</span>
+                     </Link>
+                  </div>
                </ul>
             </nav>
          </div>

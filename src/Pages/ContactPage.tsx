@@ -1,15 +1,14 @@
 import { communications, contacts } from "../constants/utils";
 
-
 import { Communications,  } from "../constants/types";
 import { Link } from "react-router-dom";
 
 const ContactPage = () => {
    return (
-      <section className="bg-light-gray py-[1rem]">
+      <section className="bg-light-gray py-[2rem]">
          <div className="mx-[12rem]">
-            <div className="bg-white py-[1rem]">
-               <h1 className="text-center text-4xl tracking-wide font-palanquin font-bold text-red-500 mb-5">CONTACT US</h1>
+            <div className="bg-white py-[2rem]">
+               <h1 className="text-center text-4xl tracking-wide font-palanquin font-semibold text-red-500 mb-5">CONTACT US</h1>
 
                <div className="flex justify-center items-center gap-[1rem] py-5">
                   <div className="p-5">
@@ -18,7 +17,7 @@ const ContactPage = () => {
                         <input className="contact-inputs" type="text" name="full name" id="fullName" placeholder="full name" required />
                         <input className="contact-inputs" type="number" name="phone number" id="phoneNumber" placeholder="Phone number" required />
                         <input className="contact-inputs" type="email" name="email" id="email" placeholder="Email" required />
-                        <textarea name="comment" id="comment" rows={10} cols={50} className="bg-light-gray p-2"></textarea>
+                        <textarea name="comment" placeholder="Comment" id="comment" rows={10} cols={50} className="bg-light-gray p-2"></textarea>
                         <button type="submit" className="w-[200px] py-2 bg-red-500 text-white hover:bg-opacity-80 transition-all">SEND NOW</button>
                      </form>
                   </div>
