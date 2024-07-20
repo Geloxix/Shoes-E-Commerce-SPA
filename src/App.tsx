@@ -64,7 +64,7 @@ const App = () => {
             },
             {
                path: '/cart',
-               element: <CartPage cartItems={cartItems} />
+               element: <CartPage cartItems={cartItems} />,
             },
             {
                path: '/contact',

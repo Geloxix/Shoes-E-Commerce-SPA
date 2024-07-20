@@ -57,7 +57,16 @@ const CartItems = ({ cartItem }: { cartItem: Products } ) => {
    return (
       <div className="mx-[12rem] bg-white mb-2">
          <div className="flex items-center justify-between shadow-sm px-[5rem]">
-            <div className="flex items-center justify-center gap-3">
+            <div className="flex items-center justify-center gap-5">
+               <label>
+                  <input 
+                     type="checkbox"
+                     name="product" 
+                     className="w-[30px] text-2xl" 
+                  />
+               </label>
+               
+               
                <img 
                   src={cartItem.img} alt={cartItem.name} 
                   className="w-[200px]"

@@ -17,7 +17,7 @@ const MostBuyedCard = ({ product }: { product: Products }) => {
             />
          </Link>
          
-         <p className="text-[0.90em] text-red-500 mb-2">{`$${(product.priceCents).toFixed(2)}`}</p>
+         <p className="text-[0.90em] text-red-500 font-semibold mb-2">{`$${(product.priceCents).toFixed(2)}`}</p>
          <h1 className="text-[0.90em]">{product.name}</h1>
       </li>
    );

@@ -56,7 +56,7 @@ const ContactPage = () => {
                                     <img 
                                        src={c.img} 
                                        alt="Icons" 
-                                       className="w-[30px] rounded-full p-1 bg-red-500"
+                                       className="w-[30px] rounded-full p-1 bg-red-500 hover:translate-y-[-2px] transition-all"
                                     />
                                  </Link>
                               ))
