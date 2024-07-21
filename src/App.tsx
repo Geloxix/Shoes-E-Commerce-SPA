@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { useState, useEffect } from "react";
-import { Products } from "./constants/types";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
@@ -17,11 +16,12 @@ import ContactPage from "./Pages/ContactPage";
 
 const App = () => {
    const [ products, setProducts ] = useState([]);
-   const [ loading, setLoading ] = useState<boolean>(true);
-   const [ cartItems, setCartItem ] = useState<Products[]>(() => {
-      const savedNewProducts = localStorage.getItem("cartItem");
-      return savedNewProducts ? JSON.parse(savedNewProducts) : [];
-   });   
+   const [ loading, setLoading ] =  useState<boolean>(true);
+   const [ cartItems, setCartItems ] = useState([]);
+   // const [ cartItems, setCartItem ] = useState<Products[]>(() => {
+   //    const savedNewProducts = localStorage.getItem("cartItem");
+   //    return savedNewProducts ? JSON.parse(savedNewProducts) : [];
+   // });   
 
    
    useEffect(() => {
@@ -36,6 +36,16 @@ const App = () => {
          } 
       };
 
+      const fetchCart = async() => {
+         try {
+            const res = await axios.get(`/cartApi/cart`);
+            setCartItems(res.data);
+         } catch (e) {
+            console.log("Error", e);
+         }
+      };
+
+      fetchCart();
       fetchProducts();
    },[]);
 
@@ -59,7 +69,7 @@ const App = () => {
             },
             {
                path: '/products/:productId',
-               element: <ProductPage setCartItem={setCartItem} cartItems={cartItems} />,
+               element: <ProductPage cartItems={cartItems}  />,
                loader: productLoader,
             },
             {

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 import AddToCartModal from "./AddToCartModal";
 import { Products } from "../constants/types";
@@ -8,26 +9,34 @@ import { useCartStore } from "../constants/store";
 import heartFill from "../assets/icons/heart-3-fill.svg";
 import heartLine from "../assets/icons/heart-3-line.svg";
 
-const Product = ({ product, cartItems, setCartItem }: { product: Products, cartItems: Products[] }) => {
+const Product = ({ product, cartItems }: { product: Products, cartItems: Products[] }) => {
    const { incrementCartQuantity } = useCartStore();
    const [ openModal, setOpenModal ] = useState<boolean>(false);
    const [ isClick, setIsClick ] = useState<boolean>(false);
 
-   const newProduct: Products = {
-      id: product.id,
-      name: product.name,
-      img: product.img,
-      priceCents: product.priceCents,
-      quantity: product.quantity,
-      rating: {
-         rate: product.rating.rate,
-         stars: product.rating.stars
+   //post request to add an item to cart
+   const addProduct = async() => {
+
+      const newProduct: Products= {
+         id: product.id,
+         name: product.name,
+         img: product.img,
+         quantity: product.quantity,
+         priceCents: product.priceCents,
+         rating: {
+            rate: product.rating.rate,
+            stars: product.rating.stars
+         }
+      };
+
+      try {
+         const res = await axios.post(`/cartApi/cart`, newProduct);
+         return res.data;
+      } catch (err) {
+         console.log("Error", err);
       }
-   }; 
+   };
    
-   useEffect(() => {
-      localStorage.setItem("cartItem", JSON.stringify(cartItems));
-   },[cartItems]);
 
    const handleClickFavorites = () => {
       setIsClick(!isClick);
@@ -37,13 +46,13 @@ const Product = ({ product, cartItems, setCartItem }: { product: Products, cartI
       if (cartItems.some((p: Products) => p.id === id)) {
          toast.error('item already in the cart!');
       } else {
-         setCartItem([...cartItems, newProduct]);
+         addProduct();
          incrementCartQuantity();
          setOpenModal(true);
       }
 
       setTimeout(() => {
-         setOpenModal(false);
+         setOpenModal(false); //close the modal after 1 second
       }, 1000);
    };
 

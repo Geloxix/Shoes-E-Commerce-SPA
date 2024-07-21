@@ -3,6 +3,9 @@ import { useCartStore } from "../constants/store";
 const CheckOut = () => {
    const cartQuantity = useCartStore((state) => state.cartQuantity);
 
+   // const savedTotalPrice = localStorage.getItem('totalPrice');
+   // const totalPrice = savedTotalPrice ? JSON.parse(savedTotalPrice) : 0;
+
    return (
       <div className="mx-[12rem] mt-[3rem]">
          <div className="h-[150px] flex items-end justify-between w-full py-[1rem] px-[5rem] bg-white">
