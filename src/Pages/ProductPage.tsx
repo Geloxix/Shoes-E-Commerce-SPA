@@ -5,13 +5,13 @@ import { ToastContainer } from "react-toastify";
 import Product from "../Components/Product";
 import { Products } from "../constants/types";
 
-const ProductPage = ({ cartItems }: { cartItems: Products[] }) => {
+const ProductPage = ({ cartItems, handleAddItem }: { cartItems: Products[], handleAddItem: (item: Products) => void }) => {
    const product = useLoaderData();
 
    return (
       <section className="bg-light-gray h-full">
          <ToastContainer />
-         <Product product={product} cartItems={cartItems} />
+         <Product product={product} cartItems={cartItems} handleAddItem={handleAddItem} />
       </section>
    );
 };

@@ -1,1 +1,2 @@
 npx json-server data/products.json --watch --port 1111
+npx json-server data/cart.json --watch --port 1234

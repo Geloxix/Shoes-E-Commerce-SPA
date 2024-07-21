@@ -1,40 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Products } from "../constants/types";
-import axios from "axios";
 
 import Confirmation from "./Confirmation";
 
-
-const CartItems = ({ cartItem  }: { cartItem: Products } ) => {
+const CartItems = ({ cartItem, handleRemoveCartItem, handleOnchangeCheck, checked  }: { cartItem: Products, handleRemoveCartItem: (id: number) => void } ) => {
+   const [ totalPrice, setTotalPrice ] = useState<number>(cartItem.priceCents);
    const [ itemQuantity, setItemQuantity ] = useState<number>(cartItem.quantity);
    const [ confirmation, setConfirmation ] = useState<boolean>(false);
 
-   const handleRemoveProduct = async(id: number) => {
-      const API_URL = `/cartApi/cart/${id}`;
-      try {
-         const res = await axios.delete(API_URL);
-         return res;
-      } catch (e) {
-         console.log("Error deleting cart", e);
-         
-      }
+   //remove item form cart json server
+   const handleRemoveProduct = (id: number) => {
+      handleRemoveCartItem(id);
    };
 
+   //auto updating the local storage when dependecy change 
+   useEffect(() => {
+      localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
+   },[itemQuantity]);
+
+   if (checked) {
+      console.log(totalPrice);
+      const finalPrice = totalPrice + totalPrice;
+      console.log(finalPrice);
+   } else {
+      console.log(cartItem.priceCents, "was not checked");
+   }
+
+   //decrementing itemquantity from localstorage
    const handleIncrementQuantity = () => {
       const newQuantity = itemQuantity + 1;
       setItemQuantity(newQuantity);
+      setTotalPrice(cartItem.priceCents * newQuantity);
    };
 
    const handleDecrementQuantity = () => {
-      console.log("quantity decrement");
-      
+      if (itemQuantity <= 1) {
+         setConfirmation(true);
+      } else {
+         const newQuantity = itemQuantity - 1;
+         setItemQuantity(newQuantity);
+         setTotalPrice((prev) => prev - cartItem.priceCents);
+      }
    };
    
    const handleConfirm = () => {
-      console.log("confirm");
+      handleRemoveProduct(cartItem.id);
       setConfirmation(false);
    }; 
 
+
+   //set the confirmation to false to close
    const handleCloseConfirmation = () => {
       setConfirmation(false);
    };
@@ -46,8 +61,10 @@ const CartItems = ({ cartItem  }: { cartItem: Products } ) => {
                <label>
                   <input 
                      type="checkbox"
-                     name="product" 
-                     className="w-[30px] text-2xl" 
+                     name="product"
+                     id={cartItem.id.toString()}
+                     checked={checked}
+                     onChange={handleOnchangeCheck}
                   />
                </label>
                
@@ -69,7 +86,7 @@ const CartItems = ({ cartItem  }: { cartItem: Products } ) => {
                   onClick={handleIncrementQuantity}
                >+</button>
             </div>
-            <p className="pointer-events-none text-[0.90em] text-red-500 font-semibold">{`$${cartItem.priceCents}`}</p>
+            <p className="pointer-events-none text-[0.90em] text-red-500 font-semibold">{`$${totalPrice}`}</p>
             <button 
                className="hover:text-red-500 transition-all text-[0.90em]"
                onClick={() => handleRemoveProduct(cartItem.id)}

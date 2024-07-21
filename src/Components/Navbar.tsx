@@ -13,7 +13,7 @@ import accountCircle from "../assets/icons/account-circle-line.svg";
 
 
 const Navbar = () => {
-   const cartQ = useCartStore((state) => state.cartQuantity);
+   const cartQuantity = useCartStore((state) => state.cartQuantity);
 
    return (
       <header>
@@ -60,7 +60,7 @@ const Navbar = () => {
                            alt="Cart icon"
                            className="w-[23px]" 
                         />
-                        <span className="absolute top-[-5px] right-[-5px] w-[20px] h-[19px] rounded-full text-center bg-red-600 text-white">{ cartQ }</span>
+                        <span className="absolute top-[-5px] right-[-5px] w-[20px] h-[19px] rounded-full text-center bg-red-600 text-white">{ cartQuantity }</span>
                      </Link>
                   </div>
                </ul>

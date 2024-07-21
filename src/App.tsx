@@ -1,8 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { Products } from "./constants/types";
+import { useCartStore } from "./constants/store";
 
 //PAGES
 import MainLayout from "./Layout/MainLayout";
@@ -14,7 +15,9 @@ import NotFoundPage from "./Pages/NotFoundPage";
 import CartPage from "./Pages/CartPage";
 import ContactPage from "./Pages/ContactPage";
 
+
 const App = () => {
+   const { decrementCartQuantity } = useCartStore();
    const [ products, setProducts ] = useState([]);
    const [ loading, setLoading ] =  useState<boolean>(true);
    const [ cartItems, setCartItems ] = useState([]);
@@ -49,6 +52,27 @@ const App = () => {
       fetchProducts();
    },[]);
 
+   //manipulating cart json data
+   const handleAddItem = async(item: Products) => {
+      try {
+         await axios.post('/cartApi/cart' ,item);
+      } catch (e) {
+         console.log("ERROR", e);
+      }
+   };
+
+   const handleRemoveCartItem = async(id: number) => {
+      try {
+         const API_URL = `/cartApi/cart/${id}`;
+         await axios.delete(API_URL);
+         setCartItems(cartItems.filter((item: Products) =>  item.id !== id));
+         decrementCartQuantity();
+      } catch (e) {
+         console.log("ERROR", e);
+      }
+
+   };
+
    const router = createBrowserRouter([
       {
          path: '/',
@@ -69,12 +93,12 @@ const App = () => {
             },
             {
                path: '/products/:productId',
-               element: <ProductPage cartItems={cartItems}  />,
+               element: <ProductPage cartItems={cartItems} handleAddItem={handleAddItem}  />,
                loader: productLoader,
             },
             {
                path: '/cart',
-               element: <CartPage cartItems={cartItems} />,
+               element: <CartPage cartItems={cartItems} handleRemoveCartItem={handleRemoveCartItem} />,
             },
             {
                path: '/contact',

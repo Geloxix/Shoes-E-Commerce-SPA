@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import axios from "axios";
 
 type CartStore = {
    cartQuantity: number;
@@ -18,7 +17,6 @@ const loadState = (): Partial<CartStore> => {
 
 export const useCartStore = create<CartStore>((set) => ({
    cartQuantity: 0,
-
    ...loadState(),
    incrementCartQuantity: () => {
       set((state) => {

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import axios from "axios";
 
 import AddToCartModal from "./AddToCartModal";
 import { Products } from "../constants/types";
@@ -9,7 +8,7 @@ import { useCartStore } from "../constants/store";
 import heartFill from "../assets/icons/heart-3-fill.svg";
 import heartLine from "../assets/icons/heart-3-line.svg";
 
-const Product = ({ product, cartItems }: { product: Products, cartItems: Products[] }) => {
+const Product = ({ product, cartItems, handleAddItem }: { product: Products, cartItems: Products[], handleAddItem: (item: Products) => void }) => {
    const { incrementCartQuantity } = useCartStore();
    const [ openModal, setOpenModal ] = useState<boolean>(false);
    const [ isClick, setIsClick ] = useState<boolean>(false);
@@ -29,14 +28,8 @@ const Product = ({ product, cartItems }: { product: Products, cartItems: Product
          }
       };
 
-      try {
-         const res = await axios.post(`/cartApi/cart`, newProduct);
-         return res.data;
-      } catch (err) {
-         console.log("Error", err);
-      }
+      handleAddItem(newProduct);
    };
-   
 
    const handleClickFavorites = () => {
       setIsClick(!isClick);
