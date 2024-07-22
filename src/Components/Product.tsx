@@ -21,6 +21,7 @@ const Product = ({ product, cartItems, handleAddItem }: { product: Products, car
          name: product.name,
          img: product.img,
          quantity: product.quantity,
+         isChecked: product.isChecked,
          priceCents: product.priceCents,
          rating: {
             rate: product.rating.rate,

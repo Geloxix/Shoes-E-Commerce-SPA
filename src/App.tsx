@@ -20,11 +20,7 @@ const App = () => {
    const { decrementCartQuantity } = useCartStore();
    const [ products, setProducts ] = useState([]);
    const [ loading, setLoading ] =  useState<boolean>(true);
-   const [ cartItems, setCartItems ] = useState([]);
-   // const [ cartItems, setCartItem ] = useState<Products[]>(() => {
-   //    const savedNewProducts = localStorage.getItem("cartItem");
-   //    return savedNewProducts ? JSON.parse(savedNewProducts) : [];
-   // });   
+   const [ cartItems, setCartItems ] = useState([]); 
 
    
    useEffect(() => {
@@ -98,7 +94,7 @@ const App = () => {
             },
             {
                path: '/cart',
-               element: <CartPage cartItems={cartItems} handleRemoveCartItem={handleRemoveCartItem} />,
+               element: <CartPage cartItems={cartItems} handleRemoveCartItem={handleRemoveCartItem} setCartItems={setCartItems} />,
             },
             {
                path: '/contact',

@@ -8,6 +8,7 @@ export interface Products {
    name: string;
    img: string;
    priceCents: number;
+   isChecked: boolean;
    quantity: number;
    rating: Rating;
 }; 

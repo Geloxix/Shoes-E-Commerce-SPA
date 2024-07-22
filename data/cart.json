@@ -1,22 +1,24 @@
 {
   "cart": [
     {
-      "id": "5",
-      "name": "Nike Mens Vandal High Casual Sneakers",
-      "img": "../src/assets/images/shoe-5.webp",
+      "id": "3",
+      "name": "Nike Tanjun Womens Blue Mesh Athletic Lace Up Running Shoes",
+      "img": "../src/assets/images/shoe-3.webp",
       "quantity": 1,
-      "priceCents": 300,
+      "isChecked": false,
+      "priceCents": 150,
       "rating": {
         "rate": 5,
         "stars": "../src/assets/images/ratings/rating-50.png"
       }
     },
     {
-      "id": "7",
-      "name": "Nike Little Posite Pro GS Big Kids Shoes Racer Blue Total Crimson",
-      "img": "../src/assets/images/shoe-7.webp",
+      "id": "5",
+      "name": "Nike Mens Vandal High Casual Sneakers",
+      "img": "../src/assets/images/shoe-5.webp",
       "quantity": 1,
-      "priceCents": 280,
+      "isChecked": false,
+      "priceCents": 300,
       "rating": {
         "rate": 5,
         "stars": "../src/assets/images/ratings/rating-50.png"

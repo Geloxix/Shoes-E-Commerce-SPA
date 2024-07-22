@@ -3,7 +3,8 @@ import { Products } from "../constants/types";
 
 import Confirmation from "./Confirmation";
 
-const CartItems = ({ cartItem, handleRemoveCartItem, handleOnchangeCheck, checked  }: { cartItem: Products, handleRemoveCartItem: (id: number) => void } ) => {
+const CartItems = ({ cartItem, handleRemoveCartItem, handleOnchangeCheck, isCheckedItems  }: { cartItem: Products, handleRemoveCartItem: (id: number) => void } ) => {
+
    const [ totalPrice, setTotalPrice ] = useState<number>(cartItem.priceCents);
    const [ itemQuantity, setItemQuantity ] = useState<number>(cartItem.quantity);
    const [ confirmation, setConfirmation ] = useState<boolean>(false);
@@ -17,14 +18,6 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleOnchangeCheck, checke
    useEffect(() => {
       localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
    },[itemQuantity]);
-
-   if (checked) {
-      console.log(totalPrice);
-      const finalPrice = totalPrice + totalPrice;
-      console.log(finalPrice);
-   } else {
-      console.log(cartItem.priceCents, "was not checked");
-   }
 
    //decrementing itemquantity from localstorage
    const handleIncrementQuantity = () => {
@@ -48,6 +41,11 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleOnchangeCheck, checke
       setConfirmation(false);
    }; 
 
+   if (isCheckedItems === true) {
+      console.log(cartItem.priceCents, cartItem.name, cartItem.quantity);
+   } else {
+      console.log("checked");
+   }
 
    //set the confirmation to false to close
    const handleCloseConfirmation = () => {
@@ -61,9 +59,8 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleOnchangeCheck, checke
                <label>
                   <input 
                      type="checkbox"
-                     name="product"
-                     id={cartItem.id.toString()}
-                     checked={checked}
+                     name={cartItem.name}
+                     checked={isCheckedItems}
                      onChange={handleOnchangeCheck}
                   />
                </label>
@@ -98,27 +95,3 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleOnchangeCheck, checke
 };
 
 export default CartItems;
-
-
-// if (itemQuantity <= 1) {
-//    setConfirmation(true);
-// } else {
-//    const totalPriceCents = savedPrice ? JSON.parse(savedPrice) : cartItem.priceCents;
-//    const newQuantity = itemQuantity - 1;
-//    setItemQuantity(newQuantity);
-//    setTotalPrice(totalPriceCents / newQuantity);
-// }
-
-
-// let productItem = JSON.parse(savedProduct!);
-// decrementCartQuantity();
-
-// if (cartQuantity === 1) {
-//    localStorage.removeItem('cartQuantity');
-// }
-
-// productItem = productItem.filter((item: Products) => item.id !== id)
-
-// let updatedProduct = JSON.stringify(productItem);
-
-// localStorage.setItem("cartItem", updatedProduct);

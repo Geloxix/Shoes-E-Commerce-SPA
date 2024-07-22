@@ -1,16 +1,20 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
+
 
 import { Products } from "../constants/types";
 import CartItems from "../Components/CartItems";
 import CheckOut from "../Components/CheckOut";
 import emptyCart from "../assets/images/empty-cart.png";
 
-const CartPage = ({ cartItems, handleRemoveCartItem }: { cartItems: Products[], handleRemoveCartItem: (id: number) => void }) => {
-   const [ checked, setIsChecked ] = useState<boolean>(false);
+const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: { cartItems: Products[], handleRemoveCartItem: (id: number) => void }) => {
+   let isCheckedItems: boolean; 
+
 
    const handleOnchangeCheck = (e: ChangeEvent<HTMLInputElement>) => {
-      setIsChecked(e.target.checked);
-      console.log("checked", checked); 
+      const { name, checked } = e.target;
+
+      console.log(name, checked);
+      
    };
 
 
@@ -23,7 +27,7 @@ const CartPage = ({ cartItems, handleRemoveCartItem }: { cartItems: Products[], 
                      {
                         cartItems.map((cartItem: Products) => (
                            <CartItems  
-                              checked={checked}
+                              isCheckedItems={isCheckedItems}
                               handleOnchangeCheck={handleOnchangeCheck}
                               handleRemoveCartItem={handleRemoveCartItem}
                               key={cartItem.id}
