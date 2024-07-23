@@ -1,5 +1,3 @@
-import { ChangeEvent } from "react";
-
 
 import { Products } from "../constants/types";
 import CartItems from "../Components/CartItems";
@@ -7,29 +5,23 @@ import CheckOut from "../Components/CheckOut";
 import emptyCart from "../assets/images/empty-cart.png";
 
 const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: { cartItems: Products[], handleRemoveCartItem: (id: number) => void }) => {
-   let isCheckedItems: boolean; 
 
-
-   const handleOnchangeCheck = (e: ChangeEvent<HTMLInputElement>) => {
-      const { name, checked } = e.target;
-
-      console.log(name, checked);
-      
+   const handleCheckboxChange = () => {
+      console.log("Changed");
    };
 
 
    return (
-      <section className="bg-light-gray h-full flex items-start justify-between flex-col">
+      <section className="bg-light-gray min-h-screen flex items-start justify-between flex-col">
          <div className="mx-[1rem] w-full">
             {
                cartItems.length !== 0 ? (
                   <ul className="mt-[1rem] p-3">
                      {
                         cartItems.map((cartItem: Products) => (
-                           <CartItems  
-                              isCheckedItems={isCheckedItems}
-                              handleOnchangeCheck={handleOnchangeCheck}
+                           <CartItems 
                               handleRemoveCartItem={handleRemoveCartItem}
+                              handleCheckboxChange={handleCheckboxChange}
                               key={cartItem.id}
                               cartItem={cartItem}
                            />

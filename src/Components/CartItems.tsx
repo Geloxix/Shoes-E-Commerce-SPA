@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Products } from "../constants/types";
 
 import Confirmation from "./Confirmation";
+import axios from "axios";
 
-const CartItems = ({ cartItem, handleRemoveCartItem, handleOnchangeCheck, isCheckedItems  }: { cartItem: Products, handleRemoveCartItem: (id: number) => void } ) => {
+const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }: 
+   { cartItem: Products, handleRemoveCartItem: (id: number) => void } ) => {
 
-   const [ totalPrice, setTotalPrice ] = useState<number>(cartItem.priceCents);
+   const [ itemPrice, setItemPrice ] = useState<number>(cartItem.priceCents);
    const [ itemQuantity, setItemQuantity ] = useState<number>(cartItem.quantity);
    const [ confirmation, setConfirmation ] = useState<boolean>(false);
 
@@ -14,25 +16,39 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleOnchangeCheck, isChec
       handleRemoveCartItem(id);
    };
 
-   //auto updating the local storage when dependecy change 
-   useEffect(() => {
-      localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
-   },[itemQuantity]);
-
    //decrementing itemquantity from localstorage
-   const handleIncrementQuantity = () => {
-      const newQuantity = itemQuantity + 1;
-      setItemQuantity(newQuantity);
-      setTotalPrice(cartItem.priceCents * newQuantity);
+   const handleIncrementQuantity = async(id: number) => {
+      setItemQuantity(prev => prev + 1);
+      setItemPrice(prev => prev + cartItem.priceCents);
+
+      try {
+         await axios.patch(`/cartApi/cart/${id}`, {
+            quantity: itemQuantity,
+            priceCents: itemPrice,
+         });
+      } catch (err) {
+         console.log("Filed to Updated", err);
+      }
    };
 
-   const handleDecrementQuantity = () => {
+   const handleDecrementQuantity = async(id: number) => {
+
       if (itemQuantity <= 1) {
          setConfirmation(true);
       } else {
-         const newQuantity = itemQuantity - 1;
-         setItemQuantity(newQuantity);
-         setTotalPrice((prev) => prev - cartItem.priceCents);
+
+         try { 
+            setItemQuantity(prev => prev - 1);
+            setItemPrice(prev => prev - cartItem.priceCents);
+
+            await axios.patch(`/cartApi/cart/${id}`, {
+               quantity: itemQuantity,
+               priceCents: itemPrice,
+            });
+         
+         } catch (err) {
+            console.log("Filed to Decremented", err);
+         }
       }
    };
    
@@ -40,12 +56,6 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleOnchangeCheck, isChec
       handleRemoveProduct(cartItem.id);
       setConfirmation(false);
    }; 
-
-   if (isCheckedItems === true) {
-      console.log(cartItem.priceCents, cartItem.name, cartItem.quantity);
-   } else {
-      console.log("checked");
-   }
 
    //set the confirmation to false to close
    const handleCloseConfirmation = () => {
@@ -60,8 +70,8 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleOnchangeCheck, isChec
                   <input 
                      type="checkbox"
                      name={cartItem.name}
-                     checked={isCheckedItems}
-                     onChange={handleOnchangeCheck}
+                     checked={cartItem.isChecked}
+                     onChange={handleCheckboxChange}
                   />
                </label>
                
@@ -75,15 +85,15 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleOnchangeCheck, isChec
             <div className="flex items-center justify-center">
                <button 
                   className="increment-decrement-quantity"
-                  onClick={handleDecrementQuantity}
+                  onClick={() => handleDecrementQuantity(cartItem.id)}
                >-</button>
                <p className="px-6 py-1 border-t-[1.5px] border-b-[1.5px] pointer-events-none">{ itemQuantity }</p>
                <button 
                   className="increment-decrement-quantity"
-                  onClick={handleIncrementQuantity}
+                  onClick={() => handleIncrementQuantity(cartItem.id)}
                >+</button>
             </div>
-            <p className="pointer-events-none text-[0.90em] text-red-500 font-semibold">{`$${totalPrice}`}</p>
+            <p className="pointer-events-none text-[0.90em] text-red-500 font-semibold">{`$${itemPrice}`}</p>
             <button 
                className="hover:text-red-500 transition-all text-[0.90em]"
                onClick={() => handleRemoveProduct(cartItem.id)}

@@ -16,7 +16,7 @@ const Product = ({ product, cartItems, handleAddItem }: { product: Products, car
    //post request to add an item to cart
    const addProduct = async() => {
 
-      const newProduct: Products= {
+      const newProduct: Products = {
          id: product.id,
          name: product.name,
          img: product.img,
