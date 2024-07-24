@@ -1,16 +1,35 @@
+import { ChangeEvent, useState } from "react";
+import axios from "axios";
 
 import { Products } from "../constants/types";
 import CartItems from "../Components/CartItems";
 import CheckOut from "../Components/CheckOut";
 import emptyCart from "../assets/images/empty-cart.png";
 
-const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: { cartItems: Products[], handleRemoveCartItem: (id: number) => void }) => {
 
-   const handleCheckboxChange = () => {
-      console.log("Changed");
+
+const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: { cartItems: Products[], handleRemoveCartItem: (id: number) => void }) => {   
+
+   const handleCheckboxChange = async (id: number) => {
+      const itemUpdate = cartItems.find(item => item.id === id);
+      const updatedItem = { ...itemUpdate, isChecked: !itemUpdate?.isChecked };
+
+      try {
+         //requesting patch  to updated to updated the updated item
+         await axios.patch(`/cartApi/cart/${id}`, {
+            isChecked: updatedItem,
+         });
+
+         setCartItems(cartItems.map(item => item.id === id ? updatedItem : item));
+      } catch (err) {
+         console.log("Error: " + err);
+      }
    };
 
+   // filter to include only the items where isChecked is true. then sum up the price of all checked items
+   const totalPrice = cartItems.filter(item => item.isChecked).reduce((sum, currentItem) => sum + currentItem.priceCents ,0)
 
+   
    return (
       <section className="bg-light-gray min-h-screen flex items-start justify-between flex-col">
          <div className="mx-[1rem] w-full">
@@ -27,7 +46,7 @@ const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: { cartItems
                            />
                         ))
                      }
-                     <CheckOut />
+                     <CheckOut totalPrice={totalPrice} />
                      
                   </ul>
                ) :

@@ -4,24 +4,120 @@
       "id": "8",
       "name": "Nike Womens Free RN Distnce Running Shoes Hype Pink Black Blue Glowing",
       "img": "../src/assets/images/shoe-8.webp",
-      "quantity": 2,
+      "quantity": 4,
       "isChecked": false,
-      "priceCents": 600,
+      "priceCents": 2400,
       "rating": {
         "rate": 5,
         "stars": "../src/assets/images/ratings/rating-50.png"
+      },
+      "updatedItem": {
+        "id": "8",
+        "name": "Nike Womens Free RN Distnce Running Shoes Hype Pink Black Blue Glowing",
+        "img": "../src/assets/images/shoe-8.webp",
+        "quantity": 4,
+        "isChecked": false,
+        "priceCents": 2400,
+        "rating": {
+          "rate": 5,
+          "stars": "../src/assets/images/ratings/rating-50.png"
+        },
+        "updatedItem": {
+          "id": "8",
+          "name": "Nike Womens Free RN Distnce Running Shoes Hype Pink Black Blue Glowing",
+          "img": "../src/assets/images/shoe-8.webp",
+          "quantity": 4,
+          "isChecked": true,
+          "priceCents": 2400,
+          "rating": {
+            "rate": 5,
+            "stars": "../src/assets/images/ratings/rating-50.png"
+          },
+          "updatedItem": {
+            "id": "8",
+            "name": "Nike Womens Free RN Distnce Running Shoes Hype Pink Black Blue Glowing",
+            "img": "../src/assets/images/shoe-8.webp",
+            "quantity": 4,
+            "isChecked": false,
+            "priceCents": 2400,
+            "rating": {
+              "rate": 5,
+              "stars": "../src/assets/images/ratings/rating-50.png"
+            },
+            "updatedItem": {
+              "id": "8",
+              "name": "Nike Womens Free RN Distnce Running Shoes Hype Pink Black Blue Glowing",
+              "img": "../src/assets/images/shoe-8.webp",
+              "quantity": 4,
+              "isChecked": false,
+              "priceCents": 2400,
+              "rating": {
+                "rate": 5,
+                "stars": "../src/assets/images/ratings/rating-50.png"
+              }
+            }
+          }
+        }
       }
     },
     {
       "id": "1",
       "name": "Nike Mens Air Pegasus 30 Running Shoes",
       "img": "../src/assets/images/shoe-1.jpeg",
-      "quantity": 2,
+      "quantity": 3,
       "isChecked": false,
-      "priceCents": 300,
+      "priceCents": 600,
       "rating": {
         "rate": 4.5,
         "stars": "../src/assets/images/ratings/rating-45.png"
+      },
+      "updatedItem": {
+        "id": "1",
+        "name": "Nike Mens Air Pegasus 30 Running Shoes",
+        "img": "../src/assets/images/shoe-1.jpeg",
+        "quantity": 3,
+        "isChecked": false,
+        "priceCents": 600,
+        "rating": {
+          "rate": 4.5,
+          "stars": "../src/assets/images/ratings/rating-45.png"
+        },
+        "updatedItem": {
+          "id": "1",
+          "name": "Nike Mens Air Pegasus 30 Running Shoes",
+          "img": "../src/assets/images/shoe-1.jpeg",
+          "quantity": 3,
+          "isChecked": true,
+          "priceCents": 600,
+          "rating": {
+            "rate": 4.5,
+            "stars": "../src/assets/images/ratings/rating-45.png"
+          },
+          "updatedItem": {
+            "id": "1",
+            "name": "Nike Mens Air Pegasus 30 Running Shoes",
+            "img": "../src/assets/images/shoe-1.jpeg",
+            "quantity": 3,
+            "isChecked": false,
+            "priceCents": 600,
+            "rating": {
+              "rate": 4.5,
+              "stars": "../src/assets/images/ratings/rating-45.png"
+            },
+            "updatedItem": {
+              "id": "1",
+              "name": "Nike Mens Air Pegasus 30 Running Shoes",
+              "img": "../src/assets/images/shoe-1.jpeg",
+              "quantity": 3,
+              "isChecked": true,
+              "priceCents": 600,
+              "rating": {
+                "rate": 4.5,
+                "stars": "../src/assets/images/ratings/rating-45.png"
+              }
+            }
+          }
+        }
       }
     },
     {
@@ -34,6 +130,42 @@
       "rating": {
         "rate": 5,
         "stars": "../src/assets/images/ratings/rating-50.png"
+      },
+      "updatedItem": {
+        "id": "2",
+        "name": "Nike Sweet Classic Leather High Top Sneakers in Black For Men",
+        "img": "../src/assets/images/shoe-2.webp",
+        "quantity": 1,
+        "isChecked": false,
+        "priceCents": 120,
+        "rating": {
+          "rate": 5,
+          "stars": "../src/assets/images/ratings/rating-50.png"
+        },
+        "updatedItem": {
+          "id": "2",
+          "name": "Nike Sweet Classic Leather High Top Sneakers in Black For Men",
+          "img": "../src/assets/images/shoe-2.webp",
+          "quantity": 1,
+          "isChecked": true,
+          "priceCents": 120,
+          "rating": {
+            "rate": 5,
+            "stars": "../src/assets/images/ratings/rating-50.png"
+          },
+          "updatedItem": {
+            "id": "2",
+            "name": "Nike Sweet Classic Leather High Top Sneakers in Black For Men",
+            "img": "../src/assets/images/shoe-2.webp",
+            "quantity": 1,
+            "isChecked": false,
+            "priceCents": 120,
+            "rating": {
+              "rate": 5,
+              "stars": "../src/assets/images/ratings/rating-50.png"
+            }
+          }
+        }
       }
     }
   ]

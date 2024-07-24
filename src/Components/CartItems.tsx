@@ -4,8 +4,7 @@ import { Products } from "../constants/types";
 import Confirmation from "./Confirmation";
 import axios from "axios";
 
-const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }: 
-   { cartItem: Products, handleRemoveCartItem: (id: number) => void } ) => {
+const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }: { cartItem: Products, handleRemoveCartItem: (id: number) => void } ) => {
 
    const [ itemPrice, setItemPrice ] = useState<number>(cartItem.priceCents);
    const [ itemQuantity, setItemQuantity ] = useState<number>(cartItem.quantity);
@@ -16,6 +15,7 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }:
       handleRemoveCartItem(id);
    };
 
+   
    //decrementing itemquantity from localstorage
    const handleIncrementQuantity = async(id: number) => {
       setItemQuantity(prev => prev + 1);
@@ -62,6 +62,7 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }:
       setConfirmation(false);
    };
 
+
    return (
       <div className="mx-[12rem] bg-white mb-2">
          <div className="flex items-center justify-between shadow-sm px-[5rem]">
@@ -71,7 +72,7 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }:
                      type="checkbox"
                      name={cartItem.name}
                      checked={cartItem.isChecked}
-                     onChange={handleCheckboxChange}
+                     onChange={() => handleCheckboxChange(cartItem.id, cartItem.isChecked, cartItem.name)}
                   />
                </label>
                
@@ -93,13 +94,14 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }:
                   onClick={() => handleIncrementQuantity(cartItem.id)}
                >+</button>
             </div>
-            <p className="pointer-events-none text-[0.90em] text-red-500 font-semibold">{`$${itemPrice}`}</p>
+            <p className="pointer-events-none text-[0.90em] text-red-500 font-semibold">{`$${itemPrice.toFixed(2)}`}</p>
             <button 
                className="hover:text-red-500 transition-all text-[0.90em]"
                onClick={() => handleRemoveProduct(cartItem.id)}
             >Delete</button>
          </div>
-         <Confirmation itemName={cartItem.name} confirmation={confirmation} handleConfirm={handleConfirm} handleCloseConfirmation={handleCloseConfirmation}  />
+         <Confirmation itemName={cartItem.name} confirmation={confirmation} handleConfirm={handleConfirm} 
+         handleCloseConfirmation={handleCloseConfirmation}  />
       </div>
    );
 };
