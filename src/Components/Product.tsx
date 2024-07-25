@@ -8,7 +8,14 @@ import { useCartStore } from "../constants/store";
 import heartFill from "../assets/icons/heart-3-fill.svg";
 import heartLine from "../assets/icons/heart-3-line.svg";
 
-const Product = ({ product, cartItems, handleAddItem }: { product: Products, cartItems: Products[], handleAddItem: (item: Products) => void }) => {
+
+interface ProductComponentsProps {
+   product: Products;
+   cartItems: Products[];
+   handleAddItem: (item: Products) => void
+};
+
+const Product = ({ product, cartItems, handleAddItem }: ProductComponentsProps) => {
    const { incrementCartQuantity } = useCartStore();
    const [ openModal, setOpenModal ] = useState<boolean>(false);
    const [ isClick, setIsClick ] = useState<boolean>(false);
@@ -29,7 +36,8 @@ const Product = ({ product, cartItems, handleAddItem }: { product: Products, car
          }
       };
 
-      handleAddItem(newProduct);
+      handleAddItem(newProduct)
+      
    };
 
    const handleClickFavorites = () => {

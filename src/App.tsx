@@ -18,7 +18,7 @@ import ContactPage from "./Pages/ContactPage";
 
 const App = () => {
    const { decrementCartQuantity } = useCartStore();
-   const [ products, setProducts ] = useState([]);
+   const [ products, setProducts ] = useState<Products []>([]);
    const [ loading, setLoading ] =  useState<boolean>(true);
    const [ cartItems, setCartItems ] = useState([]); 
 
@@ -55,6 +55,7 @@ const App = () => {
       } catch (e) {
          console.log("ERROR", e);
       }
+
    };
 
    const handleRemoveCartItem = async(id: number) => {

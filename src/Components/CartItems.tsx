@@ -4,7 +4,13 @@ import { Products } from "../constants/types";
 import Confirmation from "./Confirmation";
 import axios from "axios";
 
-const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }: { cartItem: Products, handleRemoveCartItem: (id: number) => void } ) => {
+interface CartItemProps {
+   cartItem: Products;
+   handleRemoveCartItem: (id: number) => void;
+   handleCheckboxChange: (id: number) => void;
+};
+
+const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }: CartItemProps ) => {
 
    const [ itemPrice, setItemPrice ] = useState<number>(cartItem.priceCents);
    const [ itemQuantity, setItemQuantity ] = useState<number>(cartItem.quantity);
@@ -28,7 +34,7 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }: { 
          });
       } catch (err) {
          console.log("Filed to Updated", err);
-      }
+      }      
    };
 
    const handleDecrementQuantity = async(id: number) => {
@@ -72,7 +78,7 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }: { 
                      type="checkbox"
                      name={cartItem.name}
                      checked={cartItem.isChecked}
-                     onChange={() => handleCheckboxChange(cartItem.id, cartItem.isChecked, cartItem.name)}
+                     onChange={() => handleCheckboxChange(cartItem.id)}
                   />
                </label>
                

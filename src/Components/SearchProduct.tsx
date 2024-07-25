@@ -3,7 +3,7 @@ import { ChangeEvent } from "react";
 
 // import { SearchProductTypes } from "../constants/types";
 
-const SearchProduct = ({  filteredProduct, setFilteredProduct }: { filteredProduct: string }) => {
+const SearchProduct = ({  filteredProduct, setFilteredProduct }: { filteredProduct: string, setFilteredProduct: (e: string) => void }) => {
 
    const handleFilterProducts = (e: ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();

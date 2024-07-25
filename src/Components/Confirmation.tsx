@@ -2,7 +2,9 @@
 import { Box } from "@mui/material";
 import Modal from "@mui/material/Modal";
 
-const Confirmation = ({ confirmation, handleConfirm, handleCloseConfirmation, itemName } ) => {
+const Confirmation = ({ confirmation, handleConfirm, handleCloseConfirmation, itemName }: {
+      confirmation: boolean, handleConfirm: () => void, handleCloseConfirmation: () => void, itemName: string
+   }) => {
 
    if (!confirmation) {
       return null;
