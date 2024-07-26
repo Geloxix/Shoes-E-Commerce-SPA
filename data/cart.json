@@ -1,38 +1,26 @@
 {
   "cart": [
     {
-      "id": "2",
-      "name": "Nike Sweet Classic Leather High Top Sneakers in Black For Men",
-      "img": "../src/assets/images/shoe-2.webp",
-      "quantity": 4,
+      "id": "1",
+      "name": "Nike Mens Air Pegasus 30 Running Shoes",
+      "img": "../src/assets/images/shoe-1.jpeg",
+      "quantity": 3,
       "isChecked": {
-        "id": "2",
-        "name": "Nike Sweet Classic Leather High Top Sneakers in Black For Men",
-        "img": "../src/assets/images/shoe-2.webp",
+        "id": "1",
+        "name": "Nike Mens Air Pegasus 30 Running Shoes",
+        "img": "../src/assets/images/shoe-1.jpeg",
         "quantity": 1,
-        "isChecked": true,
-        "priceCents": 120,
+        "isChecked": false,
+        "priceCents": 150,
         "rating": {
-          "rate": 5,
-          "stars": "../src/assets/images/ratings/rating-50.png"
+          "rate": 4.5,
+          "stars": "../src/assets/images/ratings/rating-45.png"
         }
       },
-      "priceCents": 480,
+      "priceCents": 450,
       "rating": {
-        "rate": 5,
-        "stars": "../src/assets/images/ratings/rating-50.png"
-      }
-    },
-    {
-      "id": "5",
-      "name": "Nike Mens Vandal High Casual Sneakers",
-      "img": "../src/assets/images/shoe-5.webp",
-      "quantity": 1,
-      "isChecked": false,
-      "priceCents": 300,
-      "rating": {
-        "rate": 5,
-        "stars": "../src/assets/images/ratings/rating-50.png"
+        "rate": 4.5,
+        "stars": "../src/assets/images/ratings/rating-45.png"
       }
     }
   ]

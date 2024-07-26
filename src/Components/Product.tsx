@@ -12,16 +12,18 @@ import heartLine from "../assets/icons/heart-3-line.svg";
 interface ProductComponentsProps {
    product: Products;
    cartItems: Products[];
-   handleAddItem: (item: Products) => void
+   handleAddItem: (item: Products) => void;
 };
 
 const Product = ({ product, cartItems, handleAddItem }: ProductComponentsProps) => {
+
    const { incrementCartQuantity } = useCartStore();
    const [ openModal, setOpenModal ] = useState<boolean>(false);
    const [ isClick, setIsClick ] = useState<boolean>(false);
 
+   
    //post request to add an item to cart
-   const addProduct = async() => {
+   const addProduct = () => {
 
       const newProduct: Products = {
          id: product.id,
@@ -36,8 +38,7 @@ const Product = ({ product, cartItems, handleAddItem }: ProductComponentsProps) 
          }
       };
 
-      handleAddItem(newProduct)
-      
+      handleAddItem(newProduct);
    };
 
    const handleClickFavorites = () => {
@@ -52,6 +53,7 @@ const Product = ({ product, cartItems, handleAddItem }: ProductComponentsProps) 
          incrementCartQuantity();
          setOpenModal(true);
       }
+
 
       setTimeout(() => {
          setOpenModal(false); //close the modal after 1 second

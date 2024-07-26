@@ -21,29 +21,32 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }: Ca
       handleRemoveCartItem(id);
    };
 
-   
+ 
    //decrementing itemquantity from localstorage
    const handleIncrementQuantity = async(id: number) => {
-      setItemQuantity(prev => prev + 1);
-      setItemPrice(prev => prev + cartItem.priceCents);
+      if (itemQuantity >= 1) {
+         try {
+            setItemQuantity(itemQuantity + 1);
+            setItemPrice(itemPrice + cartItem.priceCents);
 
-      try {
-         await axios.patch(`/cartApi/cart/${id}`, {
-            quantity: itemQuantity,
-            priceCents: itemPrice,
-         });
-      } catch (err) {
-         console.log("Filed to Updated", err);
-      }      
+            await axios.patch(`/cartApi/cart/${id}`, {
+               quantity: cartItem.quantity + itemQuantity,
+               priceCents: cartItem.priceCents + itemPrice,
+            });
+         } catch (err) {
+            console.log("Filed to Updated", err);
+         }   
+      } else {
+         setItemPrice(prevQuantity => prevQuantity);
+         setItemPrice(prevPrice => prevPrice);
+      }
+         
    };
 
    const handleDecrementQuantity = async(id: number) => {
 
-      if (itemQuantity <= 1) {
-         setConfirmation(true);
-      } else {
-
-         try { 
+      if (itemQuantity > 1) {
+          try { 
             setItemQuantity(prev => prev - 1);
             setItemPrice(prev => prev - cartItem.priceCents);
 
@@ -51,10 +54,13 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }: Ca
                quantity: itemQuantity,
                priceCents: itemPrice,
             });
-         
+            
          } catch (err) {
             console.log("Filed to Decremented", err);
          }
+         
+      } else {
+         setConfirmation(true); 
       }
    };
    

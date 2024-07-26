@@ -18,9 +18,9 @@ import ContactPage from "./Pages/ContactPage";
 
 const App = () => {
    const { decrementCartQuantity } = useCartStore();
-   const [ products, setProducts ] = useState<Products []>([]);
+   const [ products, setProducts ] = useState<Products[]>([]);
    const [ loading, setLoading ] =  useState<boolean>(true);
-   const [ cartItems, setCartItems ] = useState([]); 
+   const [ cartItems, setCartItems ] = useState<Products []>([]); 
 
    
    useEffect(() => {
@@ -52,6 +52,7 @@ const App = () => {
    const handleAddItem = async(item: Products) => {
       try {
          await axios.post('/cartApi/cart' ,item);
+         setCartItems(prevCartItems => [...prevCartItems, item]);
       } catch (e) {
          console.log("ERROR", e);
       }
@@ -67,7 +68,6 @@ const App = () => {
       } catch (e) {
          console.log("ERROR", e);
       }
-
    };
 
    const router = createBrowserRouter([
@@ -90,12 +90,12 @@ const App = () => {
             },
             {
                path: '/products/:productId',
-               element: <ProductPage cartItems={cartItems} handleAddItem={handleAddItem}  />,
+               element: <ProductPage cartItems={cartItems} handleAddItem={handleAddItem} />,
                loader: productLoader,
             },
             {
                path: '/cart',
-               element: <CartPage cartItems={cartItems} handleRemoveCartItem={handleRemoveCartItem} setCartItems={setCartItems} />,
+               element: <CartPage cartItems={cartItems} handleRemoveCartItem={handleRemoveCartItem} setCartItems={setCartItems}  />,
             },
             {
                path: '/contact',

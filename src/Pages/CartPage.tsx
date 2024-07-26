@@ -4,6 +4,7 @@ import { Products } from "../constants/types";
 import CartItems from "../Components/CartItems";
 import CheckOut from "../Components/CheckOut";
 import emptyCart from "../assets/images/empty-cart.png";
+// import { useEffect, useState } from "react";
 
 //Cartpage types props
 interface CartPageProps {
@@ -28,11 +29,12 @@ const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: CartPagePro
       } catch (err) {
          console.log("Error: " + err);
       }
+      
    };
 
    // filter to include only the items where isChecked is true. then sum up the price of all checked items
-   const totalPrice = cartItems.filter(item => item.isChecked).reduce((sum, currentItem) => sum + currentItem.priceCents ,0);
-   
+   const totalPrice = cartItems.filter(item => item.isChecked === true).reduce((sum, currentItem) => sum + currentItem.priceCents ,0);
+
    return (
       <section className="bg-light-gray min-h-screen flex items-start justify-between flex-col">
          <div className="mx-[1rem] w-full">
