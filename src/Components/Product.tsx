@@ -32,6 +32,7 @@ const Product = ({ product, cartItems, handleAddItem }: ProductComponentsProps) 
          quantity: product.quantity,
          isChecked: product.isChecked,
          priceCents: product.priceCents,
+         originalPriceCents: product.originalPriceCents,
          rating: {
             rate: product.rating.rate,
             stars: product.rating.stars

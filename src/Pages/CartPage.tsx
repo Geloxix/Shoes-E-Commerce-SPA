@@ -1,10 +1,8 @@
-import axios from "axios";
 
 import { Products } from "../constants/types";
 import CartItems from "../Components/CartItems";
 import CheckOut from "../Components/CheckOut";
 import emptyCart from "../assets/images/empty-cart.png";
-// import { useEffect, useState } from "react";
 
 //Cartpage types props
 interface CartPageProps {
@@ -14,26 +12,6 @@ interface CartPageProps {
 };
 
 const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: CartPageProps ) => {   
-
-   const handleCheckboxChange = async (id: number) => {
-      const itemUpdate = cartItems.find(item => item.id === id);
-      const updatedItem = { ...itemUpdate, isChecked: !itemUpdate?.isChecked };
-
-      try {
-         //requesting patch  to updated to updated the updated item
-         await axios.patch(`/cartApi/cart/${id}`, {
-            isChecked: updatedItem,
-         });
-
-         setCartItems((prevCartItems: Products[]) => prevCartItems.map(item => item.id === id ? updatedItem : item));
-      } catch (err) {
-         console.log("Error: " + err);
-      }
-      
-   };
-
-   // filter to include only the items where isChecked is true. then sum up the price of all checked items
-   const totalPrice = cartItems.filter(item => item.isChecked === true).reduce((sum, currentItem) => sum + currentItem.priceCents ,0);
 
    return (
       <section className="bg-light-gray min-h-screen flex items-start justify-between flex-col">
@@ -45,13 +23,13 @@ const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: CartPagePro
                         cartItems.map((cartItem: Products) => (
                            <CartItems 
                               handleRemoveCartItem={handleRemoveCartItem}
-                              handleCheckboxChange={handleCheckboxChange}
+                              setCartItems={setCartItems}
                               key={cartItem.id}
                               cartItem={cartItem}
                            />
                         ))
                      }
-                     <CheckOut totalPrice={totalPrice} />
+                     <CheckOut cartItems={cartItems} />
                      
                   </ul>
                ) :
@@ -65,8 +43,6 @@ const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: CartPagePro
                </div>
             }
          </div>
-        
-         
       </section>
    );
 };

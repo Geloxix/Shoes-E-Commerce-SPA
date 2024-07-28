@@ -7,63 +7,98 @@ import axios from "axios";
 interface CartItemProps {
    cartItem: Products;
    handleRemoveCartItem: (id: number) => void;
-   handleCheckboxChange: (id: number) => void;
+   setCartItems: any;
 };
 
-const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }: CartItemProps ) => {
+const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemProps ) => {
 
    const [ itemPrice, setItemPrice ] = useState<number>(cartItem.priceCents);
    const [ itemQuantity, setItemQuantity ] = useState<number>(cartItem.quantity);
    const [ confirmation, setConfirmation ] = useState<boolean>(false);
 
-   //remove item form cart json server
+
+   //remove item from cart json server
    const handleRemoveProduct = (id: number) => {
       handleRemoveCartItem(id);
    };
 
- 
-   //decrementing itemquantity from localstorage
+   //function that handle the checkbox
+   const handleCheckboxChange = async (id: number) => {
+      const updatedItem = { ...cartItem, isChecked: !cartItem.isChecked, priceCents: itemPrice };
+
+      try {
+         //requesting patch to updated to updated the updated item
+         await axios.patch(`/cartApi/cart/${id}`, {
+            isChecked: updatedItem.isChecked,
+            priceCents: updatedItem.priceCents
+         });
+
+         setCartItems((prevCartItems: Products[]) => prevCartItems.map(item => item.id === id ? updatedItem : item));
+      } catch (err) {
+         console.log("Error: " + err);
+      }
+   };
+
+
+   //incrementing item quantity
    const handleIncrementQuantity = async(id: number) => {
+      
       if (itemQuantity >= 1) {
          try {
-            setItemQuantity(itemQuantity + 1);
-            setItemPrice(itemPrice + cartItem.priceCents);
-
             await axios.patch(`/cartApi/cart/${id}`, {
-               quantity: cartItem.quantity + itemQuantity,
-               priceCents: cartItem.priceCents + itemPrice,
+               quantity: cartItem.quantity += 1,
+               priceCents: cartItem.priceCents += cartItem.originalPriceCents,
             });
+
+            setItemQuantity(prevQuan => prevQuan + 1);
+            setItemPrice(prevPrice => prevPrice += cartItem.originalPriceCents);
+
+            if (cartItem.isChecked)  {
+               setCartItems((prevCartItems: Products[]) => prevCartItems.map(item => item.id === id ? { ...item, priceCents: cartItem.priceCents } : item));
+            }
+         
          } catch (err) {
             console.log("Filed to Updated", err);
          }   
+
+         
       } else {
          setItemPrice(prevQuantity => prevQuantity);
          setItemPrice(prevPrice => prevPrice);
-      }
+      }  
          
    };
 
+
+   //function to decrement quantity of the product in cart
    const handleDecrementQuantity = async(id: number) => {
 
       if (itemQuantity > 1) {
-          try { 
-            setItemQuantity(prev => prev - 1);
-            setItemPrice(prev => prev - cartItem.priceCents);
-
+         try { 
             await axios.patch(`/cartApi/cart/${id}`, {
-               quantity: itemQuantity,
-               priceCents: itemPrice,
+               quantity: cartItem.quantity -= 1,
+               priceCents: cartItem.priceCents -= cartItem.originalPriceCents,
             });
             
+            setItemQuantity(prevQuan => prevQuan -= 1);
+            setItemPrice(prevPrice => prevPrice -= cartItem.originalPriceCents);
+
+            if (cartItem.isChecked)  {
+               setCartItems((prevCartItems: Products[]) => prevCartItems.map(item => item.id === id ? { ...item, priceCents: cartItem.priceCents } : item));
+            }
+
          } catch (err) {
             console.log("Filed to Decremented", err);
          }
          
       } else {
-         setConfirmation(true); 
+         setConfirmation(true);
       }
    };
    
+  
+
+
    const handleConfirm = () => {
       handleRemoveProduct(cartItem.id);
       setConfirmation(false);
@@ -74,7 +109,7 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }: Ca
       setConfirmation(false);
    };
 
-
+   
    return (
       <div className="mx-[12rem] bg-white mb-2">
          <div className="flex items-center justify-between shadow-sm px-[5rem]">
@@ -106,7 +141,7 @@ const CartItems = ({ cartItem, handleRemoveCartItem, handleCheckboxChange  }: Ca
                   onClick={() => handleIncrementQuantity(cartItem.id)}
                >+</button>
             </div>
-            <p className="pointer-events-none text-[0.90em] text-red-500 font-semibold">{`$${itemPrice.toFixed(2)}`}</p>
+            <p className="pointer-events-none text-[0.90em] text-red-500 font-semibold">{`$${itemPrice}`}</p>
             <button 
                className="hover:text-red-500 transition-all text-[0.90em]"
                onClick={() => handleRemoveProduct(cartItem.id)}

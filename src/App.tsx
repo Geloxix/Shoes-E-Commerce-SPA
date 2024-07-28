@@ -22,7 +22,6 @@ const App = () => {
    const [ loading, setLoading ] =  useState<boolean>(true);
    const [ cartItems, setCartItems ] = useState<Products []>([]); 
 
-   
    useEffect(() => {
       const fetchProducts = async() => {
          try {

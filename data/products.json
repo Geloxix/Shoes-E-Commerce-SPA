@@ -5,6 +5,7 @@
       "name": "Nike Mens Air Pegasus 30 Running Shoes",
       "img": "../src/assets/images/shoe-1.jpeg",
       "priceCents": 150,
+      "originalPriceCents": 150,
       "isChecked": false,
       "quantity": 1,
       "rating": {
@@ -17,6 +18,7 @@
       "name": "Nike Sweet Classic Leather High Top Sneakers in Black For Men",
       "img": "../src/assets/images/shoe-2.webp",
       "priceCents": 120,
+      "originalPriceCents": 120,
       "isChecked": false,
       "quantity": 1,
       "rating": {
@@ -29,6 +31,7 @@
       "name": "Nike Tanjun Womens Blue Mesh Athletic Lace Up Running Shoes",
       "img": "../src/assets/images/shoe-3.webp",
       "priceCents": 150,
+      "originalPriceCents": 150,
       "isChecked": false,
       "quantity": 1,
       "rating": {
@@ -41,6 +44,7 @@
       "name": "Nike Wms Dunk High SP Varsity Purple White Women Shoes",
       "img": "../src/assets/images/shoe-4.jpg",
       "priceCents": 200,
+      "originalPriceCents": 200,
       "isChecked": false,
       "quantity": 1,
       "rating": {
@@ -53,6 +57,7 @@
       "name": "Nike Mens Vandal High Casual Sneakers",
       "img": "../src/assets/images/shoe-5.webp",
       "priceCents": 300,
+      "originalPriceCents": 300,
       "isChecked": false,
       "quantity": 1,
       "rating": {
@@ -65,6 +70,7 @@
       "name": "Nike Air Zoom X Clay Court Shoe Men Golden Yellow",
       "img": "../src/assets/images/shoe-6.jpg",
       "priceCents": 260,
+      "originalPriceCents": 260,
       "isChecked": false,
       "quantity": 1,
       "rating": {
@@ -77,6 +83,7 @@
       "name": "Nike Little Posite Pro GS Big Kids Shoes Racer Blue Total Crimson",
       "img": "../src/assets/images/shoe-7.webp",
       "priceCents": 280,
+      "originalPriceCents": 280,
       "isChecked": false,
       "quantity": 1,
       "rating": {
@@ -89,6 +96,7 @@
       "name": "Nike Womens Free RN Distnce Running Shoes Hype Pink Black Blue Glowing",
       "img": "../src/assets/images/shoe-8.webp",
       "priceCents": 300,
+      "originalPriceCents": 300,
       "isChecked": false,
       "quantity": 1,
       "rating": {

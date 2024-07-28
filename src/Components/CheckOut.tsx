@@ -1,7 +1,12 @@
 import { useCartStore } from "../constants/store";
+import { Products } from "../constants/types";
 
-const CheckOut = ({ totalPrice }: { totalPrice: number} ) => {
+
+const CheckOut = ({ cartItems }: { cartItems: Products[] }) => {
    const cartQuantity = useCartStore((state) => state.cartQuantity);
+  
+   // filter to include only the items where isChecked is true. then sum up the price of all checked items
+   const totalPrice = cartItems.filter(item => item.isChecked).reduce((sum, currentItem) => sum + currentItem.priceCents ,0);
 
    return (
       <div className="mx-[12rem] mt-[3rem]">
