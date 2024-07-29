@@ -1,3 +1,17 @@
 {
-  "cart": []
+  "cart": [
+    {
+      "id": "2",
+      "name": "Nike Sweet Classic Leather High Top Sneakers in Black For Men",
+      "img": "../src/assets/images/shoe-2.webp",
+      "quantity": 6,
+      "isChecked": true,
+      "priceCents": 720,
+      "originalPriceCents": 120,
+      "rating": {
+        "rate": 5,
+        "stars": "../src/assets/images/ratings/rating-50.png"
+      }
+    }
+  ]
 }

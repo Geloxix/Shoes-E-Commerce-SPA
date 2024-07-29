@@ -11,6 +11,7 @@ interface CartPageProps {
    setCartItems: any;
 };
 
+
 const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: CartPageProps ) => {   
 
    return (

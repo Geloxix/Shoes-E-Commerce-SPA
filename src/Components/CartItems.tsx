@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Products } from "../constants/types";
-
-import Confirmation from "./Confirmation";
 import axios from "axios";
+import { useCartStore } from "../constants/store";
+
+import { Products } from "../constants/types";
+import Confirmation from "./Confirmation";
+
 
 interface CartItemProps {
    cartItem: Products;
@@ -10,7 +12,12 @@ interface CartItemProps {
    setCartItems: any;
 };
 
-const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemProps ) => {
+export interface RemoveSelectedRef {
+   handleRemoveSelectedItem: () => void;
+};
+
+const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems}: CartItemProps ) => {
+   const { incrementTotalItemSelected, decrementTotalItemSelected } = useCartStore();
 
    const [ itemPrice, setItemPrice ] = useState<number>(cartItem.priceCents);
    const [ itemQuantity, setItemQuantity ] = useState<number>(cartItem.quantity);
@@ -20,11 +27,19 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemPro
    //remove item from cart json server
    const handleRemoveProduct = (id: number) => {
       handleRemoveCartItem(id);
+      decrementTotalItemSelected();
    };
+
 
    //function that handle the checkbox
    const handleCheckboxChange = async (id: number) => {
       const updatedItem = { ...cartItem, isChecked: !cartItem.isChecked, priceCents: itemPrice };
+
+      if (cartItem.isChecked !== false) {
+         decrementTotalItemSelected();
+      } else {
+         incrementTotalItemSelected();
+      }
 
       try {
          //requesting patch to updated to updated the updated item
@@ -39,6 +54,7 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemPro
       }
    };
 
+   
 
    //incrementing item quantity
    const handleIncrementQuantity = async(id: number) => {
@@ -97,8 +113,6 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemPro
    };
    
   
-
-
    const handleConfirm = () => {
       handleRemoveProduct(cartItem.id);
       setConfirmation(false);
