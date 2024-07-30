@@ -1,27 +1,22 @@
 import { useCartStore } from "../constants/store";
 import { Products } from "../constants/types";
 
-
-const CheckOut = ({ cartItems }: { cartItems: Products[] }) => {
+const CheckOut = ({ cartItems, handleRemoveSelectedItem }: { cartItems: Products[], handleRemoveSelectedItem: () => void }) => {
    const cartQuantity = useCartStore((state) => state.cartQuantity);
    const totalItemSelected = useCartStore((state) => state.totalItemSelected);
    
    // filter to include only the items where isChecked is true. then sum up the price of all checked items
    const totalPrice = cartItems.filter(item => item.isChecked).reduce((sum, currentItem) => sum + currentItem.priceCents ,0);
 
+
    return (
       <div className="mx-[12rem] mt-[3rem]">
          <div className="h-[120px] flex items-end justify-between w-full py-[1rem] px-[5rem] bg-white">
             
             <div className="flex gap-5 items-center justify-center">
-               <input 
-                  type="checkbox"
-                  name="product" 
-                  className="w-[30px] border-2" 
-                  width={30}
-               />
                <p>{`Select All(${cartQuantity})`}</p>
                <button 
+                  onClick={handleRemoveSelectedItem}
                   className="hover:text-red-500 transition-all"
                >
                   delete

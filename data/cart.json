@@ -4,13 +4,26 @@
       "id": "2",
       "name": "Nike Sweet Classic Leather High Top Sneakers in Black For Men",
       "img": "../src/assets/images/shoe-2.webp",
-      "quantity": 6,
+      "quantity": 1,
       "isChecked": true,
-      "priceCents": 720,
+      "priceCents": 120,
       "originalPriceCents": 120,
       "rating": {
         "rate": 5,
         "stars": "../src/assets/images/ratings/rating-50.png"
+      }
+    },
+    {
+      "id": "4",
+      "name": "Nike Wms Dunk High SP Varsity Purple White Women Shoes",
+      "img": "../src/assets/images/shoe-4.jpg",
+      "quantity": 1,
+      "isChecked": false,
+      "priceCents": 200,
+      "originalPriceCents": 200,
+      "rating": {
+        "rate": 4.5,
+        "stars": "../src/assets/images/ratings/rating-45.png"
       }
     }
   ]

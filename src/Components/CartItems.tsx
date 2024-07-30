@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useState,Ref, useImperativeHandle } from "react";
 import axios from "axios";
 import { useCartStore } from "../constants/store";
 
@@ -10,13 +10,14 @@ interface CartItemProps {
    cartItem: Products;
    handleRemoveCartItem: (id: number) => void;
    setCartItems: any;
+   cartItems: Products[];
 };
 
-export interface RemoveSelectedRef {
-   handleRemoveSelectedItem: () => void;
+export interface RemoveItemsRef {
+   handlDeleteSelected: () => void;
 };
 
-const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems}: CartItemProps ) => {
+const CartItems = forwardRef(({ cartItem, handleRemoveCartItem, setCartItems, cartItems}: CartItemProps, ref: Ref<RemoveItemsRef> ) => {
    const { incrementTotalItemSelected, decrementTotalItemSelected } = useCartStore();
 
    const [ itemPrice, setItemPrice ] = useState<number>(cartItem.priceCents);
@@ -30,6 +31,17 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems}: CartItemProp
       decrementTotalItemSelected();
    };
 
+   const handlDeleteSelected = () => {
+      const allCheckedItems = cartItems.find(item => item.isChecked);
+
+      if (allCheckedItems) {
+         handleRemoveProduct(cartItem.id);
+      }
+   };
+
+   useImperativeHandle(ref, () => ({
+      handlDeleteSelected,
+   }))
 
    //function that handle the checkbox
    const handleCheckboxChange = async (id: number) => {
@@ -155,7 +167,7 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems}: CartItemProp
                   onClick={() => handleIncrementQuantity(cartItem.id)}
                >+</button>
             </div>
-            <p className="pointer-events-none text-[0.90em] text-red-500 font-semibold">{`$${itemPrice}`}</p>
+            <p className="pointer-events-none text-[0.90em] text-red-500 font-semibold">{`$${itemPrice.toFixed(2)}`}</p>
             <button 
                className="hover:text-red-500 transition-all text-[0.90em]"
                onClick={() => handleRemoveProduct(cartItem.id)}
@@ -165,6 +177,6 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems}: CartItemProp
          handleCloseConfirmation={handleCloseConfirmation}  />
       </div>
    );
-};
+});
 
 export default CartItems;
