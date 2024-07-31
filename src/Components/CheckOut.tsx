@@ -1,22 +1,48 @@
+import axios from "axios";
+
 import { useCartStore } from "../constants/store";
 import { Products } from "../constants/types";
 
-const CheckOut = ({ cartItems, handleRemoveSelectedItem }: { cartItems: Products[], handleRemoveSelectedItem: () => void }) => {
+
+const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartItems: any }) => {
+   const { decrementCartQuantity, decrementTotalItemSelected } = useCartStore();
    const cartQuantity = useCartStore((state) => state.cartQuantity);
    const totalItemSelected = useCartStore((state) => state.totalItemSelected);
    
    // filter to include only the items where isChecked is true. then sum up the price of all checked items
    const totalPrice = cartItems.filter(item => item.isChecked).reduce((sum, currentItem) => sum + currentItem.priceCents ,0);
 
+   const decrementQuantityItemSelected = () => {
+      decrementCartQuantity();
+      decrementTotalItemSelected();
+   };
+  
+  
+   const handleDeleteSelectedItems = async() => {
+      try {
+         // mapped the cartitem and find the item that is selected and delete it
+         const selectedItems = cartItems.map(item => item.isChecked ? axios.delete(`/cartApi/cart/${item.id}`) : null );
+
+         //wait for all delete request complete if not returns an error
+         await Promise.all(selectedItems);
+
+         cartItems.map(item => item.isChecked ? decrementQuantityItemSelected()  : null);
+         setCartItems((prevItems: Products[]) => prevItems.filter(item => !item.isChecked));
+         
+      } catch (err) {
+         console.log("Error", err);
+      } 
+   };
 
    return (
       <div className="mx-[12rem] mt-[3rem]">
          <div className="h-[120px] flex items-end justify-between w-full py-[1rem] px-[5rem] bg-white">
             
             <div className="flex gap-5 items-center justify-center">
+               <input type="checkbox" name="" id="" />
                <p>{`Select All(${cartQuantity})`}</p>
                <button 
-                  onClick={handleRemoveSelectedItem}
+                  onClick={handleDeleteSelectedItems}
                   className="hover:text-red-500 transition-all"
                >
                   delete

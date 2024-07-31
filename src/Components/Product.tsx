@@ -7,8 +7,9 @@ import { Products } from "../constants/types";
 import { useCartStore } from "../constants/store";
 import heartFill from "../assets/icons/heart-3-fill.svg";
 import heartLine from "../assets/icons/heart-3-line.svg";
+import { RiArrowLeftSLine } from "@remixicon/react";
 
-
+//product props types
 interface ProductComponentsProps {
    product: Products;
    cartItems: Products[];
@@ -25,6 +26,7 @@ const Product = ({ product, cartItems, handleAddItem }: ProductComponentsProps) 
    //post request to add an item to cart
    const addProduct = () => {
 
+      // new prodct to add
       const newProduct: Products = {
          id: product.id,
          name: product.name,
@@ -47,6 +49,7 @@ const Product = ({ product, cartItems, handleAddItem }: ProductComponentsProps) 
    };
 
    const handleAddToCart = (id: number) => {
+      // check if the id exist through iterated cartitems
       if (cartItems.some((p: Products) => p.id === id)) {
          toast.error('item already in the cart!');
       } else {
@@ -63,6 +66,15 @@ const Product = ({ product, cartItems, handleAddItem }: ProductComponentsProps) 
 
    return (
       <div className="mx-[12rem] py-[1rem]">
+         <button className="mb-[1.5rem] flex gap-1 hover:text-red-500 transition-all font-sans text-[0.90rem] py-2 px-4 bg-white rounded-md"> 
+            <RiArrowLeftSLine />
+            <Link 
+               to="/products"
+            >
+               Return products
+            </Link>
+         </button>
+         
          <div className="flex gap-8 bg-white p-5">
             <div>
                <img 
@@ -85,7 +97,7 @@ const Product = ({ product, cartItems, handleAddItem }: ProductComponentsProps) 
                </li>
             </div>
 
-            <div className="p-3 flex flex-col items-start justify-between py-3">
+            <div className="p-3 flex flex-col items-start justify-evenly py-3">
                <div>
                   <p className="text-wrap text-[20px] mb-2">{ product.name }</p>
                   <div className="flex items-center justify-start mb-3">

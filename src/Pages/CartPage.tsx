@@ -1,7 +1,6 @@
-import { useRef } from "react";
 
 import { Products } from "../constants/types";
-import CartItems, { RemoveItemsRef } from "../Components/CartItems";
+import CartItems from "../Components/CartItems";
 import CheckOut from "../Components/CheckOut";
 import emptyCart from "../assets/images/empty-cart.png";
 
@@ -14,11 +13,6 @@ interface CartPageProps {
 
 
 const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: CartPageProps ) => {   
-   const removeItemRef = useRef<RemoveItemsRef>(null);
-
-   const handleRemoveSelectedItem = () => {
-      removeItemRef.current?.handlDeleteSelected();
-   };
 
    return (
       <section className="bg-light-gray min-h-screen flex items-start justify-between flex-col">
@@ -29,16 +23,14 @@ const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: CartPagePro
                      {
                         cartItems.map((cartItem: Products) => (
                            <CartItems 
-                              ref={removeItemRef}
                               handleRemoveCartItem={handleRemoveCartItem}
                               setCartItems={setCartItems}
-                              cartItems={cartItems}
                               key={cartItem.id}
                               cartItem={cartItem}
                            />
                         ))
                      }
-                     <CheckOut cartItems={cartItems} handleRemoveSelectedItem={handleRemoveSelectedItem}  />
+                     <CheckOut cartItems={cartItems}  setCartItems={setCartItems} />
                   </ul>
                ) :
                <div className="flex items-center justify-center my-[10%] flex-col gap-5">

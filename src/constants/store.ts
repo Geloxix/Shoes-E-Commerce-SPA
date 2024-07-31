@@ -23,7 +23,7 @@ export const useCartStore = create<CartStore>((set) => ({
    totalItemSelected: 0,
    ...loadState(),
    incrementTotalItemSelected: () => {
-      set((state) =>  ({ totalItemSelected: state.totalItemSelected += 1 }))
+      set((state) =>  ({ totalItemSelected: state.totalItemSelected + 1 }))
    },
    decrementTotalItemSelected: () => {
       set((state) => ({ totalItemSelected: state.totalItemSelected === 0 ? state.totalItemSelected = 0 : state.totalItemSelected -= 1 }))

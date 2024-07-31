@@ -23,6 +23,7 @@ const App = () => {
    const [ cartItems, setCartItems ] = useState<Products []>([]); 
 
    useEffect(() => {
+      //fetch the products api
       const fetchProducts = async() => {
          try {
             const res = await axios.get(`/api/products`);
@@ -34,6 +35,7 @@ const App = () => {
          } 
       };
 
+      //fetches the cart api
       const fetchCart = async() => {
          try {
             const res = await axios.get(`/cartApi/cart`);
@@ -47,7 +49,7 @@ const App = () => {
       fetchProducts();
    },[]);
 
-   //manipulating cart json data
+   //adding new cart items/products
    const handleAddItem = async(item: Products) => {
       try {
          await axios.post('/cartApi/cart' ,item);
@@ -58,10 +60,12 @@ const App = () => {
 
    };
 
+
+   //function that handle removing item from api
    const handleRemoveCartItem = async(id: number) => {
       try {
          const API_URL = `/cartApi/cart/${id}`;
-         await axios.delete(API_URL);
+         await axios.delete(API_URL); //send delete request
          setCartItems(cartItems.filter((item: Products) =>  item.id !== id));
          decrementCartQuantity();
       } catch (e) {

@@ -1,4 +1,4 @@
-import { forwardRef, useState,Ref, useImperativeHandle } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useCartStore } from "../constants/store";
 
@@ -10,14 +10,13 @@ interface CartItemProps {
    cartItem: Products;
    handleRemoveCartItem: (id: number) => void;
    setCartItems: any;
-   cartItems: Products[];
 };
 
 export interface RemoveItemsRef {
    handlDeleteSelected: () => void;
 };
 
-const CartItems = forwardRef(({ cartItem, handleRemoveCartItem, setCartItems, cartItems}: CartItemProps, ref: Ref<RemoveItemsRef> ) => {
+const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemProps ) => {
    const { incrementTotalItemSelected, decrementTotalItemSelected } = useCartStore();
 
    const [ itemPrice, setItemPrice ] = useState<number>(cartItem.priceCents);
@@ -30,18 +29,6 @@ const CartItems = forwardRef(({ cartItem, handleRemoveCartItem, setCartItems, ca
       handleRemoveCartItem(id);
       decrementTotalItemSelected();
    };
-
-   const handlDeleteSelected = () => {
-      const allCheckedItems = cartItems.find(item => item.isChecked);
-
-      if (allCheckedItems) {
-         handleRemoveProduct(cartItem.id);
-      }
-   };
-
-   useImperativeHandle(ref, () => ({
-      handlDeleteSelected,
-   }))
 
    //function that handle the checkbox
    const handleCheckboxChange = async (id: number) => {
@@ -177,6 +164,6 @@ const CartItems = forwardRef(({ cartItem, handleRemoveCartItem, setCartItems, ca
          handleCloseConfirmation={handleCloseConfirmation}  />
       </div>
    );
-});
+};
 
 export default CartItems;
