@@ -1,10 +1,13 @@
 import axios from "axios";
+import { useState } from "react";
 
 import { useCartStore } from "../constants/store";
 import { Products } from "../constants/types";
-
+import RemoveSelectedItemConfirmation from "./RemoveSelectedItemConfirmation";
 
 const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartItems: any }) => {
+   const [ isOpenModal, setIsOpenModal ] = useState<boolean>(false);
+
    const { decrementCartQuantity, decrementTotalItemSelected } = useCartStore();
    const cartQuantity = useCartStore((state) => state.cartQuantity);
    const totalItemSelected = useCartStore((state) => state.totalItemSelected);
@@ -32,6 +35,20 @@ const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartI
       } catch (err) {
          console.log("Error", err);
       } 
+   }; 
+
+
+   const handleYesButton = () => {
+      handleDeleteSelectedItems();
+      setIsOpenModal(false);
+   };
+
+   const handleNoButton = () => {
+      setIsOpenModal(false);
+   };
+
+   const handleOpenModal = () => {
+      setIsOpenModal(true);
    };
 
    return (
@@ -39,10 +56,14 @@ const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartI
          <div className="h-[120px] flex items-end justify-between w-full py-[1rem] px-[5rem] bg-white">
             
             <div className="flex gap-5 items-center justify-center">
-               <input type="checkbox" name="" id="" />
+               <input 
+                  type="checkbox" 
+                  name="" 
+                  id="" 
+               />
                <p>{`Select All(${cartQuantity})`}</p>
                <button 
-                  onClick={handleDeleteSelectedItems}
+                  onClick={handleOpenModal}
                   className="hover:text-red-500 transition-all"
                >
                   delete
@@ -60,6 +81,7 @@ const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartI
             </div> 
 
          </div>
+         <RemoveSelectedItemConfirmation totalItemSelected={totalItemSelected} isOpenModal={isOpenModal} handleYesButton={handleYesButton} handleNoButton={handleNoButton} />
       </div>
       
    );

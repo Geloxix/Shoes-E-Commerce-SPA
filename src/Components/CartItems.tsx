@@ -17,110 +17,109 @@ export interface RemoveItemsRef {
 };
 
 const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemProps ) => {
-   const { incrementTotalItemSelected, decrementTotalItemSelected } = useCartStore();
+    const { incrementTotalItemSelected, decrementTotalItemSelected } = useCartStore();
 
-   const [ itemPrice, setItemPrice ] = useState<number>(cartItem.priceCents);
-   const [ itemQuantity, setItemQuantity ] = useState<number>(cartItem.quantity);
-   const [ confirmation, setConfirmation ] = useState<boolean>(false);
+    const [ itemPrice, setItemPrice ] = useState<number>(cartItem.priceCents);
+    const [ itemQuantity, setItemQuantity ] = useState<number>(cartItem.quantity);
+    const [ confirmation, setConfirmation ] = useState<boolean>(false);
+    
+    //remove item from cart json server
+    const handleRemoveProduct = (id: number) => {
+        handleRemoveCartItem(id);
+        decrementTotalItemSelected();
+    };
 
+    //function that handle the checkbox
+    const handleCheckboxChange = async (id: number) => {
+        const updatedItem = { ...cartItem, isChecked: !cartItem.isChecked, priceCents: itemPrice };
 
-   //remove item from cart json server
-   const handleRemoveProduct = (id: number) => {
-      handleRemoveCartItem(id);
-      decrementTotalItemSelected();
-   };
+        if (cartItem.isChecked !== false) {
+            decrementTotalItemSelected();
+        } else {
+            incrementTotalItemSelected();
+        }
 
-   //function that handle the checkbox
-   const handleCheckboxChange = async (id: number) => {
-      const updatedItem = { ...cartItem, isChecked: !cartItem.isChecked, priceCents: itemPrice };
-
-      if (cartItem.isChecked !== false) {
-         decrementTotalItemSelected();
-      } else {
-         incrementTotalItemSelected();
-      }
-
-      try {
-         //requesting patch to updated to updated the updated item
-         await axios.patch(`/cartApi/cart/${id}`, {
-            isChecked: updatedItem.isChecked,
-            priceCents: updatedItem.priceCents
-         });
-
-         setCartItems((prevCartItems: Products[]) => prevCartItems.map(item => item.id === id ? updatedItem : item));
-      } catch (err) {
-         console.log("Error: " + err);
-      }
-   };
-
-   
-
-   //incrementing item quantity
-   const handleIncrementQuantity = async(id: number) => {
-      
-      if (itemQuantity >= 1) {
-         try {
+        try {
+            //requesting patch to updated to updated the updated item
             await axios.patch(`/cartApi/cart/${id}`, {
-               quantity: cartItem.quantity += 1,
-               priceCents: cartItem.priceCents += cartItem.originalPriceCents,
+                isChecked: updatedItem.isChecked,
+                priceCents: updatedItem.priceCents
             });
 
-            setItemQuantity(prevQuan => prevQuan + 1);
-            setItemPrice(prevPrice => prevPrice += cartItem.originalPriceCents);
+            setCartItems((prevCartItems: Products[]) => prevCartItems.map(item => item.id === id ? updatedItem : item));
+        } catch (err) {
+            console.log("Error: " + err);
+        }
+    };
 
-            if (cartItem.isChecked)  {
-               setCartItems((prevCartItems: Products[]) => prevCartItems.map(item => item.id === id ? { ...item, priceCents: cartItem.priceCents } : item));
-            }
-         
-         } catch (err) {
-            console.log("Filed to Updated", err);
-         }   
+    
 
-         
-      } else {
-         setItemPrice(prevQuantity => prevQuantity);
-         setItemPrice(prevPrice => prevPrice);
-      }  
-         
-   };
+    //incrementing item quantity
+        const handleIncrementQuantity = async(id: number) => {
+            
+            if (itemQuantity >= 1) {
+                try {
+                    await axios.patch(`/cartApi/cart/${id}`, {
+                        quantity: cartItem.quantity += 1,
+                        priceCents: cartItem.priceCents += cartItem.originalPriceCents,
+                    });
+
+                    setItemQuantity(prevQuan => prevQuan + 1);
+                    setItemPrice(prevPrice => prevPrice += cartItem.originalPriceCents);
+
+                    if (cartItem.isChecked)  {
+                        setCartItems((prevCartItems: Products[]) => prevCartItems.map(item => item.id === id ? { ...item, priceCents: cartItem.priceCents } : item));
+                    }
+                
+                } catch (err) {
+                    console.log("Filed to Updated", err);
+                }   
+
+                
+            } else {
+                setItemPrice(prevQuantity => prevQuantity);
+                setItemPrice(prevPrice => prevPrice);
+            }  
+            
+    };
 
 
    //function to decrement quantity of the product in cart
-   const handleDecrementQuantity = async(id: number) => {
+    const handleDecrementQuantity = async(id: number) => {
 
-      if (itemQuantity > 1) {
-         try { 
-            await axios.patch(`/cartApi/cart/${id}`, {
-               quantity: cartItem.quantity -= 1,
-               priceCents: cartItem.priceCents -= cartItem.originalPriceCents,
-            });
-            
-            setItemQuantity(prevQuan => prevQuan -= 1);
-            setItemPrice(prevPrice => prevPrice -= cartItem.originalPriceCents);
+        if (itemQuantity > 1) {
+            try { 
+                await axios.patch(`/cartApi/cart/${id}`, {
+                    quantity: cartItem.quantity -= 1,
+                    priceCents: cartItem.priceCents -= cartItem.originalPriceCents,
+                });
+                
+                setItemQuantity(prevQuan => prevQuan -= 1);
+                setItemPrice(prevPrice => prevPrice -= cartItem.originalPriceCents);
 
-            if (cartItem.isChecked)  {
-               setCartItems((prevCartItems: Products[]) => prevCartItems.map(item => item.id === id ? { ...item, priceCents: cartItem.priceCents } : item));
+                if (cartItem.isChecked)  {
+                    setCartItems((prevCartItems: Products[]) => prevCartItems.map(item => item.id === id ? { ...item, priceCents: cartItem.priceCents } : item));
+                }
+
+            } catch (err) {
+                console.log("Filed to Decremented", err);
             }
-
-         } catch (err) {
-            console.log("Filed to Decremented", err);
-         }
-         
-      } else {
-         setConfirmation(true);
-      }
-   };
+            
+        } else {
+            setConfirmation(true);
+        }
+    };
    
-  
-   const handleConfirm = () => {
-      handleRemoveProduct(cartItem.id);
-      setConfirmation(false);
-   }; 
+    // remove product and set confirmation to false to close
+    const handleConfirm = () => {
+        handleRemoveProduct(cartItem.id);
+        setConfirmation(false);
+    }; 
 
-   //set the confirmation to false to close
-   const handleCloseConfirmation = () => {
-      setConfirmation(false);
-   };
+    //set the confirmation to false to close
+    const handleCloseConfirmation = () => {
+        setConfirmation(false);
+    };
 
    
    return (

@@ -1,3 +1,17 @@
 {
-  "cart": []
+  "cart": [
+    {
+      "id": "4",
+      "name": "Nike Wms Dunk High SP Varsity Purple White Women Shoes",
+      "img": "../src/assets/images/shoe-4.jpg",
+      "quantity": 7,
+      "isChecked": false,
+      "priceCents": 1400,
+      "originalPriceCents": 200,
+      "rating": {
+        "rate": 4.5,
+        "stars": "../src/assets/images/ratings/rating-45.png"
+      }
+    }
+  ]
 }
