@@ -33,6 +33,7 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemPro
     const handleCheckboxChange = async (id: number) => {
         const updatedItem = { ...cartItem, isChecked: !cartItem.isChecked, priceCents: itemPrice };
 
+        
         if (cartItem.isChecked !== false) {
             decrementTotalItemSelected();
         } else {
@@ -134,7 +135,6 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemPro
                      onChange={() => handleCheckboxChange(cartItem.id)}
                   />
                </label>
-               
                
                <img 
                   src={cartItem.img} alt={cartItem.name} 

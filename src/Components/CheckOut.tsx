@@ -7,8 +7,9 @@ import RemoveSelectedItemConfirmation from "./RemoveSelectedItemConfirmation";
 
 const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartItems: any }) => {
    const [ isOpenModal, setIsOpenModal ] = useState<boolean>(false);
+   const [ isMasterChecked, setIsMasterChecked ] = useState<boolean>(false);
 
-   const { decrementCartQuantity, decrementTotalItemSelected } = useCartStore();
+   const { decrementCartQuantity, decrementTotalItemSelected, incrementTotalItemSelected } = useCartStore();
    const cartQuantity = useCartStore((state) => state.cartQuantity);
    const totalItemSelected = useCartStore((state) => state.totalItemSelected);
    
@@ -37,6 +38,27 @@ const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartI
       } 
    }; 
 
+   // function to handle selecting all itrms in cart
+   const handleSelectAll = async() => {
+      const updatedMasterChecked = !isMasterChecked;
+      setIsMasterChecked(updatedMasterChecked);
+
+      try {
+         const updatedAllChecked = cartItems.map((item) => {
+
+            axios.patch(`/cartApi/cart/${item.id}`,{
+               isChecked: updatedMasterChecked,
+            });
+         })
+
+         await Promise.all(updatedAllChecked);
+      } catch (err) {
+         console.log("Error: ", err); 
+      }
+
+      cartItems.map((item) => item.isChecked ? decrementTotalItemSelected() : incrementTotalItemSelected())
+      setCartItems((prevItems: Products[]) => prevItems.map(product => ({ ...product, isChecked: updatedMasterChecked })));
+   };
 
    const handleYesButton = () => {
       handleDeleteSelectedItems();
@@ -58,7 +80,9 @@ const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartI
             <div className="flex gap-5 items-center justify-center">
                <input 
                   type="checkbox" 
-                  name="" 
+                  name="select all checkbox" 
+                  checked={isMasterChecked}
+                  onChange={handleSelectAll}
                   id="" 
                />
                <p>{`Select All(${cartQuantity})`}</p>
