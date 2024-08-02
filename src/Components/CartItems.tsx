@@ -18,6 +18,7 @@ export interface RemoveItemsRef {
 
 const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemProps ) => {
     const { incrementTotalItemSelected, decrementTotalItemSelected } = useCartStore();
+    // const totalItemSelected = useCartStore(state => state.totalItemSelected);
 
     const [ itemPrice, setItemPrice ] = useState<number>(cartItem.priceCents);
     const [ itemQuantity, setItemQuantity ] = useState<number>(cartItem.quantity);
@@ -33,8 +34,8 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemPro
     const handleCheckboxChange = async (id: number) => {
         const updatedItem = { ...cartItem, isChecked: !cartItem.isChecked, priceCents: itemPrice };
 
-        
-        if (cartItem.isChecked !== false) {
+
+        if (cartItem.isChecked === true) {
             decrementTotalItemSelected();
         } else {
             incrementTotalItemSelected();

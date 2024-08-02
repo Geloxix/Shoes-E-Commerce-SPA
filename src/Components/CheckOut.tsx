@@ -9,7 +9,7 @@ const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartI
    const [ isOpenModal, setIsOpenModal ] = useState<boolean>(false);
    const [ isMasterChecked, setIsMasterChecked ] = useState<boolean>(false);
 
-   const { decrementCartQuantity, decrementTotalItemSelected, incrementTotalItemSelected } = useCartStore();
+   const { decrementCartQuantity, decrementTotalItemSelected, incrementTotalItemSelected, } = useCartStore();
    const cartQuantity = useCartStore((state) => state.cartQuantity);
    const totalItemSelected = useCartStore((state) => state.totalItemSelected);
    
@@ -30,7 +30,7 @@ const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartI
          //wait for all delete request complete if not returns an error
          await Promise.all(selectedItems);
 
-         cartItems.map(item => item.isChecked ? decrementQuantityItemSelected()  : null);
+         cartItems.map(item => item.isChecked ? decrementQuantityItemSelected() : totalItemSelected);
          setCartItems((prevItems: Products[]) => prevItems.filter(item => !item.isChecked));
          
       } catch (err) {
@@ -38,6 +38,8 @@ const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartI
       } 
    }; 
 
+
+   
    // function to handle selecting all itrms in cart
    const handleSelectAll = async() => {
       const updatedMasterChecked = !isMasterChecked;
@@ -56,7 +58,8 @@ const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartI
          console.log("Error: ", err); 
       }
 
-      cartItems.map((item) => item.isChecked ? decrementTotalItemSelected() : incrementTotalItemSelected())
+
+      cartItems.map((item) => item.isChecked ? decrementTotalItemSelected() : incrementTotalItemSelected());
       setCartItems((prevItems: Products[]) => prevItems.map(product => ({ ...product, isChecked: updatedMasterChecked })));
    };
 
@@ -83,7 +86,6 @@ const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartI
                   name="select all checkbox" 
                   checked={isMasterChecked}
                   onChange={handleSelectAll}
-                  id="" 
                />
                <p>{`Select All(${cartQuantity})`}</p>
                <button 
