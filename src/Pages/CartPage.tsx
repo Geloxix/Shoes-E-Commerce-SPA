@@ -13,7 +13,7 @@ interface CartPageProps {
 
 
 const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: CartPageProps ) => {   
-
+    
     return (
         <section className="bg-light-gray min-h-screen flex items-start justify-between flex-col">
             <div className="mx-[1rem] w-full">
@@ -23,6 +23,7 @@ const CartPage = ({ cartItems, handleRemoveCartItem, setCartItems }: CartPagePro
                         {
                             cartItems.map((cartItem: Products) => (
                             <CartItems 
+                                cartItems={cartItems}
                                 handleRemoveCartItem={handleRemoveCartItem}
                                 setCartItems={setCartItems}
                                 key={cartItem.id}

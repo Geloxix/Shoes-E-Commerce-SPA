@@ -1,19 +1,6 @@
 {
   "cart": [
     {
-      "id": "1",
-      "name": "Nike Mens Air Pegasus 30 Running Shoes",
-      "img": "../src/assets/images/shoe-1.jpeg",
-      "quantity": 1,
-      "isChecked": true,
-      "priceCents": 150,
-      "originalPriceCents": 150,
-      "rating": {
-        "rate": 4.5,
-        "stars": "../src/assets/images/ratings/rating-45.png"
-      }
-    },
-    {
       "id": "2",
       "name": "Nike Sweet Classic Leather High Top Sneakers in Black For Men",
       "img": "../src/assets/images/shoe-2.webp",
@@ -24,6 +11,19 @@
       "rating": {
         "rate": 5,
         "stars": "../src/assets/images/ratings/rating-50.png"
+      }
+    },
+    {
+      "id": "1",
+      "name": "Nike Mens Air Pegasus 30 Running Shoes",
+      "img": "../src/assets/images/shoe-1.jpeg",
+      "quantity": 1,
+      "isChecked": true,
+      "priceCents": 150,
+      "originalPriceCents": 150,
+      "rating": {
+        "rate": 4.5,
+        "stars": "../src/assets/images/ratings/rating-45.png"
       }
     }
   ]

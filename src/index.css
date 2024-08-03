@@ -17,6 +17,7 @@
 .increment-decrement-quantity {
    @apply px-3 py-1  border-[1.5px]
 }
+
 .confirmation-buttons {
    @apply px-[2rem] py-2 text-[0.80em] transition-all
 }

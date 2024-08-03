@@ -1,19 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useCartStore } from "../constants/store";
 
 import { Products } from "../constants/types";
+import { checkBoxStyle } from "../constants/utils";
 import Confirmation from "./Confirmation";
 
+
+//material Ui IMports
+import Checkbox from "@mui/material/Checkbox";
 
 interface CartItemProps {
    cartItem: Products;
    handleRemoveCartItem: (id: number) => void;
    setCartItems: any;
-};
-
-export interface RemoveItemsRef {
-   handlDeleteSelected: () => void;
+   cartItems: Products[];
 };
 
 const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemProps ) => {
@@ -34,11 +35,10 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemPro
     const handleCheckboxChange = async (id: number) => {
         const updatedItem = { ...cartItem, isChecked: !cartItem.isChecked, priceCents: itemPrice };
 
-
-        if (cartItem.isChecked === true) {
-            decrementTotalItemSelected();
-        } else {
+        if (!cartItem.isChecked) {
             incrementTotalItemSelected();
+        } else {
+            decrementTotalItemSelected();
         }
 
         try {
@@ -53,8 +53,6 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemPro
             console.log("Error: " + err);
         }
     };
-
-    
 
     //incrementing item quantity
         const handleIncrementQuantity = async(id: number) => {
@@ -128,14 +126,12 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemPro
       <div className="mx-[12rem] bg-white mb-2">
          <div className="flex items-center justify-between shadow-sm px-[5rem]">
             <div className="flex items-center justify-center gap-5">
-               <label>
-                  <input 
-                     type="checkbox"
-                     name={cartItem.name}
-                     checked={cartItem.isChecked}
-                     onChange={() => handleCheckboxChange(cartItem.id)}
-                  />
-               </label>
+                <Checkbox 
+                    sx={checkBoxStyle}
+                    name={cartItem.name}
+                    checked={cartItem.isChecked}
+                    onChange={() => handleCheckboxChange(cartItem.id)}
+                />
                
                <img 
                   src={cartItem.img} alt={cartItem.name} 

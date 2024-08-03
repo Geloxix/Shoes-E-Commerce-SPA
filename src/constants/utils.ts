@@ -1,3 +1,16 @@
+import { red, grey } from "@mui/material/colors";
+
+export const checkBoxStyle = {
+   color: grey[500],
+      '&.Mui-checked': {
+      color: red[500],
+   },
+   '& .MuiSvgIcon-root': {
+       fontSize: 25 
+   }
+}
+
+
 export const style = {
       position: 'absolute' as 'absolute',
       top: '50%',
