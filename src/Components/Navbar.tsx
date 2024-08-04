@@ -16,7 +16,7 @@ const Navbar = () => {
    const cartQuantity = useCartStore((state) => state.cartQuantity);
 
    return (
-      <header>
+      <header className="absolute w-full bg-white z-[99999]">
          <Contact />
          <div className="flex items-center justify-between h-[70px] px-[10rem]">
             <div>

@@ -15,7 +15,7 @@ const ProductPage = ({ cartItems, handleAddItem }: ProductPageProps) => {
    const product = useLoaderData() as Products;
 
    return (
-      <section className="bg-light-gray h-full">
+      <section className="bg-light-gray py-[7rem]">
          <ToastContainer />
          <Product product={product} cartItems={cartItems} handleAddItem={handleAddItem} />
       </section>

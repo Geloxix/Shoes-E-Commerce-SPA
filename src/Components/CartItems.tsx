@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useCartStore } from "../constants/store";
 
@@ -55,31 +55,31 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemPro
     };
 
     //incrementing item quantity
-        const handleIncrementQuantity = async(id: number) => {
+    const handleIncrementQuantity = async(id: number) => {
             
-            if (itemQuantity >= 1) {
-                try {
-                    await axios.patch(`/cartApi/cart/${id}`, {
-                        quantity: cartItem.quantity += 1,
-                        priceCents: cartItem.priceCents += cartItem.originalPriceCents,
-                    });
+        if (itemQuantity >= 1) {
+            try {
+                await axios.patch(`/cartApi/cart/${id}`, {
+                    quantity: cartItem.quantity += 1,
+                    priceCents: cartItem.priceCents += cartItem.originalPriceCents,
+                });
 
-                    setItemQuantity(prevQuan => prevQuan + 1);
-                    setItemPrice(prevPrice => prevPrice += cartItem.originalPriceCents);
+                setItemQuantity(prevQuan => prevQuan + 1);
+                setItemPrice(prevPrice => prevPrice += cartItem.originalPriceCents);
 
-                    if (cartItem.isChecked)  {
-                        setCartItems((prevCartItems: Products[]) => prevCartItems.map(item => item.id === id ? { ...item, priceCents: cartItem.priceCents } : item));
-                    }
-                
-                } catch (err) {
-                    console.log("Filed to Updated", err);
-                }   
+                if (cartItem.isChecked)  {
+                    setCartItems((prevCartItems: Products[]) => prevCartItems.map(item => item.id === id ? { ...item, priceCents: cartItem.priceCents } : item));
+                }
+            
+            } catch (err) {
+                console.log("Filed to Updated", err);
+            }   
 
-                
-            } else {
-                setItemPrice(prevQuantity => prevQuantity);
-                setItemPrice(prevPrice => prevPrice);
-            }  
+            
+        } else {
+            setItemPrice(prevQuantity => prevQuantity);
+            setItemPrice(prevPrice => prevPrice);
+        }  
             
     };
 
@@ -122,44 +122,44 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemPro
     };
 
    
-   return (
-      <div className="mx-[12rem] bg-white mb-2">
-         <div className="flex items-center justify-between shadow-sm px-[5rem]">
-            <div className="flex items-center justify-center gap-5">
-                <Checkbox 
-                    sx={checkBoxStyle}
-                    name={cartItem.name}
-                    checked={cartItem.isChecked}
-                    onChange={() => handleCheckboxChange(cartItem.id)}
-                />
-               
-               <img 
-                  src={cartItem.img} alt={cartItem.name} 
-                  className="w-[200px]"
-               />
-               <p className="w-[200px] text-[0.80em] font-poppins">{ cartItem.name }</p>
+    return (
+        <div className="mx-[12rem] bg-white mb-2">
+            <div className="flex items-center justify-between shadow-sm px-[5rem]">
+                <div className="flex items-center justify-center gap-5">
+                    <Checkbox 
+                        sx={checkBoxStyle}
+                        name={cartItem.name}
+                        checked={cartItem.isChecked}
+                        onChange={() => handleCheckboxChange(cartItem.id)}
+                    />
+                
+                    <img 
+                        src={cartItem.img} alt={cartItem.name} 
+                        className="w-[180px]"
+                    />
+                    <p className="w-[200px] text-[0.80em] font-poppins">{ cartItem.name }</p>
+                </div>
+                <div className="flex items-center justify-center">
+                    <button 
+                        className="increment-decrement-quantity"
+                        onClick={() => handleDecrementQuantity(cartItem.id)}
+                    >-</button>
+                    <p className="px-6 py-1 border-t-[1.5px] border-b-[1.5px] pointer-events-none">{ itemQuantity }</p>
+                    <button 
+                        className="increment-decrement-quantity"
+                        onClick={() => handleIncrementQuantity(cartItem.id)}
+                    >+</button>
+                </div>
+                <p className="pointer-events-none text-[0.90em] text-red-500 font-semibold">{`$${itemPrice.toFixed(2)}`}</p>
+                <button 
+                className="hover:text-red-500 transition-all text-[0.90em]"
+                onClick={() => handleRemoveProduct(cartItem.id)}
+                >Delete</button>
             </div>
-            <div className="flex items-center justify-center">
-               <button 
-                  className="increment-decrement-quantity"
-                  onClick={() => handleDecrementQuantity(cartItem.id)}
-               >-</button>
-               <p className="px-6 py-1 border-t-[1.5px] border-b-[1.5px] pointer-events-none">{ itemQuantity }</p>
-               <button 
-                  className="increment-decrement-quantity"
-                  onClick={() => handleIncrementQuantity(cartItem.id)}
-               >+</button>
-            </div>
-            <p className="pointer-events-none text-[0.90em] text-red-500 font-semibold">{`$${itemPrice.toFixed(2)}`}</p>
-            <button 
-               className="hover:text-red-500 transition-all text-[0.90em]"
-               onClick={() => handleRemoveProduct(cartItem.id)}
-            >Delete</button>
-         </div>
-         <Confirmation itemName={cartItem.name} confirmation={confirmation} handleConfirm={handleConfirm} 
-         handleCloseConfirmation={handleCloseConfirmation}  />
-      </div>
-   );
+            <Confirmation itemName={cartItem.name} confirmation={confirmation} handleConfirm={handleConfirm} 
+            handleCloseConfirmation={handleCloseConfirmation}  />
+        </div>
+    );
 };
 
 export default CartItems;

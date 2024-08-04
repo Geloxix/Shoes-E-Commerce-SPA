@@ -5,7 +5,7 @@ import MostBuyedProducts from "../Components/MostBuyedProducts";
 
 const HomePage = ({ products }: { products: Products[] }) => {
    return (
-      <section>
+      <section className="h-full py-[7rem]">
          <Hero />
          <MostBuyedProducts products={products} />
       </section>

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const ContactPage = () => {
    return (
-      <section className="bg-light-gray py-[2rem]">
+      <section className="bg-light-gray pt-[7rem] h-full ">
          <div className="mx-[12rem]">
             <div className="bg-white py-[2rem]">
                <h1 className="text-center text-4xl tracking-wide font-palanquin font-semibold text-red-500 mb-5">CONTACT US</h1>
