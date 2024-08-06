@@ -1,6 +1,19 @@
 {
   "cart": [
     {
+      "id": "1",
+      "name": "Nike Mens Air Pegasus 30 Running Shoes",
+      "img": "../src/assets/images/shoe-1.jpeg",
+      "quantity": 1,
+      "isChecked": true,
+      "priceCents": 150,
+      "originalPriceCents": 150,
+      "rating": {
+        "rate": 4.5,
+        "stars": "../src/assets/images/ratings/rating-45.png"
+      }
+    },
+    {
       "id": "2",
       "name": "Nike Sweet Classic Leather High Top Sneakers in Black For Men",
       "img": "../src/assets/images/shoe-2.webp",
@@ -8,19 +21,6 @@
       "isChecked": true,
       "priceCents": 120,
       "originalPriceCents": 120,
-      "rating": {
-        "rate": 5,
-        "stars": "../src/assets/images/ratings/rating-50.png"
-      }
-    },
-    {
-      "id": "3",
-      "name": "Nike Tanjun Womens Blue Mesh Athletic Lace Up Running Shoes",
-      "img": "../src/assets/images/shoe-3.webp",
-      "quantity": 1,
-      "isChecked": false,
-      "priceCents": 150,
-      "originalPriceCents": 150,
       "rating": {
         "rate": 5,
         "stars": "../src/assets/images/ratings/rating-50.png"
@@ -40,13 +40,13 @@
       }
     },
     {
-      "id": "6",
-      "name": "Nike Air Zoom X Clay Court Shoe Men Golden Yellow",
-      "img": "../src/assets/images/shoe-6.jpg",
+      "id": "7",
+      "name": "Nike Little Posite Pro GS Big Kids Shoes Racer Blue Total Crimson",
+      "img": "../src/assets/images/shoe-7.webp",
       "quantity": 1,
-      "isChecked": true,
-      "priceCents": 260,
-      "originalPriceCents": 260,
+      "isChecked": false,
+      "priceCents": 280,
+      "originalPriceCents": 280,
       "rating": {
         "rate": 5,
         "stars": "../src/assets/images/ratings/rating-50.png"

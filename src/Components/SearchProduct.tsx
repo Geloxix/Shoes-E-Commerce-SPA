@@ -11,7 +11,7 @@ const SearchProduct = ({  filteredProduct, setFilteredProduct }: { filteredProdu
    };
 
    return (
-      <form className="w-[700px] border-2 flex font-palanquin">
+      <form className="w-[700px] shadow-md flex font-poppins text-[0.90rem]">
          <input 
             type="text" 
             name="serch product" 

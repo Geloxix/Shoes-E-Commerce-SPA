@@ -7,25 +7,29 @@ import { Products } from "../constants/types";
 import RemoveSelectedItemConfirmation from "./RemoveSelectedItemConfirmation";
 import { checkBoxStyle } from "../constants/utils";
 
-const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartItems: any }) => {
+interface CheckOutTypes {
+    cartItems: Products[];
+    setCartItems: any;
+    totalItemSelected: number;
+    setTotalItemSelected: (args: number) => void;
+};
+
+const CheckOut = ({ cartItems, setCartItems, totalItemSelected, setTotalItemSelected }: CheckOutTypes) => {
+    const { decrementCartQuantity } = useCartStore();
+    const cartQuantity = useCartStore((state) => state.cartQuantity);
+
+    
     const [ isOpenModal, setIsOpenModal ] = useState<boolean>(false);
     const [ isMasterChecked, setIsMasterChecked ] = useState<boolean>(false);
-    const [ isSticky, setIsSticky ] = useState<boolean>(false);
 
-
-    const { decrementCartQuantity, decrementTotalItemSelected, incrementTotalItemSelected } = useCartStore();
-    const cartQuantity = useCartStore((state) => state.cartQuantity);
-    const totalItemSelected = useCartStore((state) => state.totalItemSelected);
-    
     // filter to include only the items where isChecked is true. and then sum up the price of all checked items
     const totalPrice = cartItems.filter(item => item.isChecked).reduce((sum, currentItem) => sum + currentItem.priceCents ,0);
 
     const decrementQuantityItemSelected = () => {
         decrementCartQuantity();
-        decrementTotalItemSelected();
+        setTotalItemSelected(totalItemSelected -= 1);
     };
-    
-    
+
     const handleDeleteSelectedItems = async() => {
         try {
             // mapped the cartitem and find the item that is selected and delete it
@@ -62,23 +66,28 @@ const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartI
             console.log("Error: ", err); 
         }
 
-        cartItems.some((item) => !item.isChecked ? incrementTotalItemSelected() : decrementTotalItemSelected());
+
+        // cartItems.map((item) => item.isChecked === true ? decrementTotalItemSelected() : incrementTotalItemSelected());
         setCartItems((prevItems: Products[]) => prevItems.map(product => ({ ...product, isChecked: updatedMasterChecked })));
-        
+
+        // setTotalItemSelected to total cart length if updateMasterChecked id true other 0
+        if (updatedMasterChecked) {
+            setTotalItemSelected(cartItems.length);
+        } else {
+            setTotalItemSelected(0);
+        }
     };
+
+    
 
     //effect that rerender if the dependecy changes/updated
     useEffect(() => {
-
-        window.addEventListener('scroll', () => {
-            window.scrollY > 0 ? setIsSticky(false) : setIsSticky(true);
-        });
-
-
         const allSelected = cartItems.every((item) => item.isChecked);
         setIsMasterChecked(allSelected); //setting all selected to true is passed the test otherwise false
     },[cartItems]);
+    
 
+    
     // function that handles deleting selected item and closing modal
     const handleYesButton = () => {
         handleDeleteSelectedItems();
@@ -95,7 +104,7 @@ const CheckOut = ({ cartItems, setCartItems }: { cartItems: Products[], setCartI
     };
 
     return (
-        <div className={`sticky shadow-lg mx-[12rem] px-[5rem] mt-[2rem] bottom-0 left-0 right-0 h-[150px] bg-white flex justify-between items-center py-[1rem]`}>
+        <div className={`${screenY > 0 ? 'sticky' : 'block'} shadow-lg mx-[12rem] px-[5rem] mt-[2rem] bottom-0 left-0 right-0 h-[150px] bg-white flex justify-between items-center py-[1rem]`}>
             <div className="flex gap-5 items-center justify-center">
                 <Checkbox 
                     sx={checkBoxStyle}

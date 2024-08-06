@@ -16,7 +16,7 @@ const Navbar = () => {
    const cartQuantity = useCartStore((state) => state.cartQuantity);
 
    return (
-      <header className="absolute w-full bg-white z-[99999]">
+      <header className="absolute w-full bg-white z-[999]">
          <Contact />
          <div className="flex items-center justify-between h-[70px] px-[10rem]">
             <div>
@@ -34,8 +34,7 @@ const Navbar = () => {
                         <NavLink 
                            key={nav.id}
                            className={({ isActive }) => 
-                              `${isActive ? "border-b-2 border-zinc-800 transition-all" : "transition-all"} mr-[1.8rem]
-                              `}
+                              `${isActive ? "border-b-2 border-zinc-800 transition-all" : "transition-all"} mr-[1.8rem]`}
                            to={nav.path}
                         >
                            { nav.name }

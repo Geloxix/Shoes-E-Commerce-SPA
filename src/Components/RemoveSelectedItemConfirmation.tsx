@@ -20,7 +20,7 @@ const RemoveSelectedItemConfirmation = ({ totalItemSelected, isOpenModal, handle
         <Modal
             open={isOpenModal}>
             <Box sx={style}>
-                <h1 className="mb-[2.5rem] font-roboto text-lg text-red-500">{`Do you want to remove ${totalItemSelected} ${totalItemSelected > 1 ? 'products' : 'product'}?`}</h1>
+                <h1 className="mb-[2.5rem] font-roboto text-lg text-red-500 z-[99999]">{`Do you want to remove ${totalItemSelected} ${totalItemSelected > 1 ? 'products' : 'product'}?`}</h1>
 
                 <div className="flex items-center justify-end gap-3">
                     <button 

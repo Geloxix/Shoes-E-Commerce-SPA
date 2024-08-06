@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import { useCartStore } from "../constants/store";
 
 import { Products } from "../constants/types";
 import { checkBoxStyle } from "../constants/utils";
@@ -15,10 +14,12 @@ interface CartItemProps {
    handleRemoveCartItem: (id: number) => void;
    setCartItems: any;
    cartItems: Products[];
+   totalItemSelected: number;
+   setTotalItemSelected: (arg: number) => void
 };
 
-const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemProps ) => {
-    const { incrementTotalItemSelected, decrementTotalItemSelected } = useCartStore();
+const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems, totalItemSelected, setTotalItemSelected }: CartItemProps ) => {
+    // const { decrementTotalItemSelected } = useCartStore();
     // const totalItemSelected = useCartStore(state => state.totalItemSelected);
 
     const [ itemPrice, setItemPrice ] = useState<number>(cartItem.priceCents);
@@ -28,18 +29,12 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemPro
     //remove item from cart json server
     const handleRemoveProduct = (id: number) => {
         handleRemoveCartItem(id);
-        decrementTotalItemSelected();
+        setTotalItemSelected(totalItemSelected -= 1);
     };
 
     //function that handle the checkbox
     const handleCheckboxChange = async (id: number) => {
-        const updatedItem = { ...cartItem, isChecked: !cartItem.isChecked, priceCents: itemPrice };
-
-        if (!cartItem.isChecked) {
-            incrementTotalItemSelected();
-        } else {
-            decrementTotalItemSelected();
-        }
+        const updatedItem = { ...cartItem, isChecked: !cartItem.isChecked, priceCents: itemPrice }; 
 
         try {
             //requesting patch to updated to updated the updated item
@@ -52,8 +47,16 @@ const CartItems = ({ cartItem, handleRemoveCartItem, setCartItems }: CartItemPro
         } catch (err) {
             console.log("Error: " + err);
         }
+
+
+        if (!cartItem.isChecked) {
+            setTotalItemSelected(totalItemSelected += 1);
+        } else {
+            setTotalItemSelected(totalItemSelected -=1 );
+        }
     };
 
+    
     //incrementing item quantity
     const handleIncrementQuantity = async(id: number) => {
             

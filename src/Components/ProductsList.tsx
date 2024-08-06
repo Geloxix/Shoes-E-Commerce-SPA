@@ -28,7 +28,7 @@ const ProductsList = ({ filteredProducts }: { filteredProducts: Products[] }) =>
                }
             </ul> :
             <div className="my-[15%]">
-               <h1 className="text-red-500 text-lg">product not found....</h1>
+               <h1 className="text-red-500 text-xl font-semibold">product not found..!</h1>
             </div>
          }
       </>

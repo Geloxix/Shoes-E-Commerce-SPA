@@ -17,7 +17,7 @@ const Confirmation = ({ confirmation, handleConfirm, handleCloseConfirmation, it
             open={confirmation}
         >
             <Box sx={style}>
-                <h1 className="mb-5 text-xl text-red-500 font-roboto">Are you sure you want to remove?</h1>
+                <h1 className="mb-5 text-xl text-red-500 font-roboto z-[99999]">Are you sure you want to remove?</h1>
                 <p className="text-[0.90em] mb-8">{ itemName }</p>
                 <div className="flex justify-end">
                 <button
