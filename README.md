@@ -1,3 +1,11 @@
+Run this to bash CMD to acces the json server
+
+npx json-server data/products.json --watch --port 1111
+npx json-server data/cart.json --watch --port 1234
+
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
